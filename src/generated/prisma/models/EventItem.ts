@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/library"
+import type * as runtime from "@prisma/client/runtime/client"
 import type * as $Enums from "../enums.js"
 import type * as Prisma from "../internal/prismaNamespace.js"
 
@@ -200,7 +200,7 @@ export type EventItemGroupByOutputType = {
   _max: EventItemMaxAggregateOutputType | null
 }
 
-type GetEventItemGroupByPayload<T extends EventItemGroupByArgs> = Prisma.PrismaPromise<
+export type GetEventItemGroupByPayload<T extends EventItemGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<EventItemGroupByOutputType, T['by']> &
       {
@@ -1181,6 +1181,11 @@ export type EventItemFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Skip the first `n` EventItems.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of EventItems.
+   */
   distinct?: Prisma.EventItemScalarFieldEnum | Prisma.EventItemScalarFieldEnum[]
 }
 

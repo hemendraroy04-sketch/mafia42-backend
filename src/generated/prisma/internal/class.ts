@@ -11,66 +11,49 @@
  * Please import the `PrismaClient` class from the `client.ts` file instead.
  */
 
-import * as runtime from "@prisma/client/runtime/library"
+import * as runtime from "@prisma/client/runtime/client"
 import type * as Prisma from "./prismaNamespace.js"
 
 
 const config: runtime.GetPrismaClientConfig = {
-  "generator": {
-    "name": "client",
-    "provider": {
-      "fromEnvVar": null,
-      "value": "prisma-client"
-    },
-    "output": {
-      "value": "C:\\Users\\hemen\\OneDrive\\Desktop\\maf\\mafia42-backend\\src\\generated\\prisma",
-      "fromEnvVar": null
-    },
-    "config": {
-      "engineType": "library"
-    },
-    "binaryTargets": [
-      {
-        "fromEnvVar": null,
-        "value": "windows",
-        "native": true
-      }
-    ],
-    "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\hemen\\OneDrive\\Desktop\\maf\\mafia42-backend\\prisma\\schema.prisma",
-    "isCustomOutput": true
-  },
-  "relativePath": "../../../prisma",
-  "clientVersion": "6.19.3",
-  "engineVersion": "c2990dca591cba766e3b7ef5d9e8a84796e47ab7",
-  "datasourceNames": [
-    "db"
-  ],
+  "previewFeatures": [],
+  "clientVersion": "7.10.0",
+  "engineVersion": "0edf323efd1d98336f3f0a68684b56f689b900d3",
   "activeProvider": "postgresql",
-  "postinstall": false,
-  "inlineDatasources": {
-    "db": {
-      "url": {
-        "fromEnvVar": "DATABASE_URL",
-        "value": null
-      }
-    }
-  },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel RPRanking {\n  id         Int      @id @default(autoincrement())\n  date       DateTime\n  rank       Int\n  playerId   String\n  playerName String\n  rp         Int\n\n  @@unique([date, rank])\n  @@index([date])\n}\n\nmodel FameRanking {\n  id         Int      @id @default(autoincrement())\n  date       DateTime\n  rank       Int\n  playerId   String\n  playerName String\n  fame       Int\n\n  @@unique([date, rank])\n  @@index([date])\n}\n\nmodel GuildRanking {\n  id        Int      @id @default(autoincrement())\n  date      DateTime\n  rank      Int\n  guildId   String\n  guildName String\n  gp        Int\n\n  @@unique([date, rank])\n  @@index([date])\n}\n\nmodel Event {\n  id    Int        @id @default(autoincrement())\n  name  String\n  year  Int\n  boxes EventBox[]\n\n  @@unique([name, year])\n}\n\nmodel EventBox {\n  id      Int         @id @default(autoincrement())\n  eventId Int\n  name    String\n  items   EventItem[]\n\n  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)\n\n  @@index([eventId])\n}\n\nmodel EventItem {\n  id          Int    @id @default(autoincrement())\n  boxId       Int\n  name        String\n  image       String\n  probability Float\n\n  box EventBox @relation(fields: [boxId], references: [id], onDelete: Cascade)\n\n  @@index([boxId])\n}\n",
-  "inlineSchemaHash": "f26d6b3080a05b9d2671774ac2b0139c4e7b23775ffc95f2fd4a7dd908132222",
-  "copyEngine": true,
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel RPRanking {\n  id         Int      @id @default(autoincrement())\n  date       DateTime\n  rank       Int\n  playerId   String\n  playerName String\n  rp         Int\n\n  @@unique([date, rank])\n  @@index([date])\n}\n\nmodel FameRanking {\n  id         Int      @id @default(autoincrement())\n  date       DateTime\n  rank       Int\n  playerId   String\n  playerName String\n  fame       Int\n\n  @@unique([date, rank])\n  @@index([date])\n}\n\nmodel GuildRanking {\n  id        Int      @id @default(autoincrement())\n  date      DateTime\n  rank      Int\n  guildId   String\n  guildName String\n  gp        Int\n\n  @@unique([date, rank])\n  @@index([date])\n}\n\nmodel Event {\n  id    Int        @id @default(autoincrement())\n  name  String\n  year  Int\n  boxes EventBox[]\n\n  @@unique([name, year])\n}\n\nmodel EventBox {\n  id      Int         @id @default(autoincrement())\n  eventId Int\n  name    String\n  items   EventItem[]\n\n  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)\n\n  @@index([eventId])\n}\n\nmodel EventItem {\n  id          Int    @id @default(autoincrement())\n  boxId       Int\n  name        String\n  image       String\n  probability Float\n\n  box EventBox @relation(fields: [boxId], references: [id], onDelete: Cascade)\n\n  @@index([boxId])\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
     "types": {}
   },
-  "dirname": ""
+  "parameterizationSchema": {
+    "strings": [],
+    "graph": ""
+  }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"RPRanking\":{\"dbName\":null,\"schema\":null,\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"Int\",\"nativeType\":null,\"default\":{\"name\":\"autoincrement\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"date\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"DateTime\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"rank\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"playerId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"playerName\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"rp\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[[\"date\",\"rank\"]],\"uniqueIndexes\":[{\"name\":null,\"fields\":[\"date\",\"rank\"]}],\"isGenerated\":false},\"FameRanking\":{\"dbName\":null,\"schema\":null,\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"Int\",\"nativeType\":null,\"default\":{\"name\":\"autoincrement\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"date\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"DateTime\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"rank\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"playerId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"playerName\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"fame\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[[\"date\",\"rank\"]],\"uniqueIndexes\":[{\"name\":null,\"fields\":[\"date\",\"rank\"]}],\"isGenerated\":false},\"GuildRanking\":{\"dbName\":null,\"schema\":null,\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"Int\",\"nativeType\":null,\"default\":{\"name\":\"autoincrement\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"date\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"DateTime\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"rank\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"guildId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"guildName\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"gp\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[[\"date\",\"rank\"]],\"uniqueIndexes\":[{\"name\":null,\"fields\":[\"date\",\"rank\"]}],\"isGenerated\":false},\"Event\":{\"dbName\":null,\"schema\":null,\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"Int\",\"nativeType\":null,\"default\":{\"name\":\"autoincrement\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"name\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"year\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"boxes\",\"kind\":\"object\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"EventBox\",\"nativeType\":null,\"relationName\":\"EventToEventBox\",\"relationFromFields\":[],\"relationToFields\":[],\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[[\"name\",\"year\"]],\"uniqueIndexes\":[{\"name\":null,\"fields\":[\"name\",\"year\"]}],\"isGenerated\":false},\"EventBox\":{\"dbName\":null,\"schema\":null,\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"Int\",\"nativeType\":null,\"default\":{\"name\":\"autoincrement\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"eventId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":true,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"name\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"items\",\"kind\":\"object\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"EventItem\",\"nativeType\":null,\"relationName\":\"EventBoxToEventItem\",\"relationFromFields\":[],\"relationToFields\":[],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"event\",\"kind\":\"object\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Event\",\"nativeType\":null,\"relationName\":\"EventToEventBox\",\"relationFromFields\":[\"eventId\"],\"relationToFields\":[\"id\"],\"relationOnDelete\":\"Cascade\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"EventItem\":{\"dbName\":null,\"schema\":null,\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"Int\",\"nativeType\":null,\"default\":{\"name\":\"autoincrement\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"boxId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":true,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"name\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"image\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"probability\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Float\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"box\",\"kind\":\"object\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"EventBox\",\"nativeType\":null,\"relationName\":\"EventBoxToEventItem\",\"relationFromFields\":[\"boxId\"],\"relationToFields\":[\"id\"],\"relationOnDelete\":\"Cascade\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false}},\"enums\":{},\"types\":{}}")
-config.engineWasm = undefined
-config.compilerWasm = undefined
+config.runtimeDataModel = JSON.parse("{\"models\":{\"RPRanking\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"rank\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"playerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"playerName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rp\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null,\"schema\":null},\"FameRanking\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"rank\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"playerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"playerName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fame\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null,\"schema\":null},\"GuildRanking\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"rank\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"guildId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"guildName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"gp\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null,\"schema\":null},\"Event\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"year\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"boxes\",\"kind\":\"object\",\"type\":\"EventBox\",\"relationName\":\"EventToEventBox\"}],\"dbName\":null,\"schema\":null},\"EventBox\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"eventId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"items\",\"kind\":\"object\",\"type\":\"EventItem\",\"relationName\":\"EventBoxToEventItem\"},{\"name\":\"event\",\"kind\":\"object\",\"type\":\"Event\",\"relationName\":\"EventToEventBox\"}],\"dbName\":null,\"schema\":null},\"EventItem\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"boxId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"probability\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"box\",\"kind\":\"object\",\"type\":\"EventBox\",\"relationName\":\"EventBoxToEventItem\"}],\"dbName\":null,\"schema\":null}},\"enums\":{},\"types\":{}}")
+config.parameterizationSchema = {
+  strings: JSON.parse("[\"where\",\"RPRanking.findUnique\",\"RPRanking.findUniqueOrThrow\",\"orderBy\",\"cursor\",\"RPRanking.findFirst\",\"RPRanking.findFirstOrThrow\",\"RPRanking.findMany\",\"data\",\"RPRanking.createOne\",\"RPRanking.createMany\",\"RPRanking.createManyAndReturn\",\"RPRanking.updateOne\",\"RPRanking.updateMany\",\"RPRanking.updateManyAndReturn\",\"create\",\"update\",\"RPRanking.upsertOne\",\"RPRanking.deleteOne\",\"RPRanking.deleteMany\",\"having\",\"_count\",\"_avg\",\"_sum\",\"_min\",\"_max\",\"RPRanking.groupBy\",\"RPRanking.aggregate\",\"FameRanking.findUnique\",\"FameRanking.findUniqueOrThrow\",\"FameRanking.findFirst\",\"FameRanking.findFirstOrThrow\",\"FameRanking.findMany\",\"FameRanking.createOne\",\"FameRanking.createMany\",\"FameRanking.createManyAndReturn\",\"FameRanking.updateOne\",\"FameRanking.updateMany\",\"FameRanking.updateManyAndReturn\",\"FameRanking.upsertOne\",\"FameRanking.deleteOne\",\"FameRanking.deleteMany\",\"FameRanking.groupBy\",\"FameRanking.aggregate\",\"GuildRanking.findUnique\",\"GuildRanking.findUniqueOrThrow\",\"GuildRanking.findFirst\",\"GuildRanking.findFirstOrThrow\",\"GuildRanking.findMany\",\"GuildRanking.createOne\",\"GuildRanking.createMany\",\"GuildRanking.createManyAndReturn\",\"GuildRanking.updateOne\",\"GuildRanking.updateMany\",\"GuildRanking.updateManyAndReturn\",\"GuildRanking.upsertOne\",\"GuildRanking.deleteOne\",\"GuildRanking.deleteMany\",\"GuildRanking.groupBy\",\"GuildRanking.aggregate\",\"box\",\"items\",\"event\",\"boxes\",\"Event.findUnique\",\"Event.findUniqueOrThrow\",\"Event.findFirst\",\"Event.findFirstOrThrow\",\"Event.findMany\",\"Event.createOne\",\"Event.createMany\",\"Event.createManyAndReturn\",\"Event.updateOne\",\"Event.updateMany\",\"Event.updateManyAndReturn\",\"Event.upsertOne\",\"Event.deleteOne\",\"Event.deleteMany\",\"Event.groupBy\",\"Event.aggregate\",\"EventBox.findUnique\",\"EventBox.findUniqueOrThrow\",\"EventBox.findFirst\",\"EventBox.findFirstOrThrow\",\"EventBox.findMany\",\"EventBox.createOne\",\"EventBox.createMany\",\"EventBox.createManyAndReturn\",\"EventBox.updateOne\",\"EventBox.updateMany\",\"EventBox.updateManyAndReturn\",\"EventBox.upsertOne\",\"EventBox.deleteOne\",\"EventBox.deleteMany\",\"EventBox.groupBy\",\"EventBox.aggregate\",\"EventItem.findUnique\",\"EventItem.findUniqueOrThrow\",\"EventItem.findFirst\",\"EventItem.findFirstOrThrow\",\"EventItem.findMany\",\"EventItem.createOne\",\"EventItem.createMany\",\"EventItem.createManyAndReturn\",\"EventItem.updateOne\",\"EventItem.updateMany\",\"EventItem.updateManyAndReturn\",\"EventItem.upsertOne\",\"EventItem.deleteOne\",\"EventItem.deleteMany\",\"EventItem.groupBy\",\"EventItem.aggregate\",\"AND\",\"OR\",\"NOT\",\"id\",\"boxId\",\"name\",\"image\",\"probability\",\"equals\",\"in\",\"notIn\",\"lt\",\"lte\",\"gt\",\"gte\",\"not\",\"contains\",\"startsWith\",\"endsWith\",\"eventId\",\"year\",\"every\",\"some\",\"none\",\"name_year\",\"date\",\"rank\",\"guildId\",\"guildName\",\"gp\",\"date_rank\",\"playerId\",\"playerName\",\"fame\",\"rp\",\"is\",\"isNot\",\"connectOrCreate\",\"upsert\",\"createMany\",\"set\",\"disconnect\",\"delete\",\"connect\",\"updateMany\",\"deleteMany\",\"increment\",\"decrement\",\"multiply\",\"divide\"]"),
+  graph: "kAI_YApwAAC9AQAwcQAABAAQcgAAvQEAMHMCAAAAAYkBQAC3AQAhigECAKgBACGOAQAAvgEAII8BAQCpAQAhkAEBAKkBACGSAQIAqAEAIQEAAAABACABAAAAAQAgCXAAAL0BADBxAAAEABByAAC9AQAwcwIAqAEAIYkBQAC3AQAhigECAKgBACGPAQEAqQEAIZABAQCpAQAhkgECAKgBACEAAwAAAAQAIAMAAAUAMAQAAAEAIAMAAAAEACADAAAFADAEAAABACADAAAABAAgAwAABQAwBAAAAQAgBnMCAAAAAYkBQAAAAAGKAQIAAAABjwEBAAAAAZABAQAAAAGSAQIAAAABAQgAAAkAIAZzAgAAAAGJAUAAAAABigECAAAAAY8BAQAAAAGQAQEAAAABkgECAAAAAQEIAAALADABCAAACwAwBnMCAMYBACGJAUAA-gEAIYoBAgDGAQAhjwEBAMQBACGQAQEAxAEAIZIBAgDGAQAhAgAAAAEAIAgAAA4AIAZzAgDGAQAhiQFAAPoBACGKAQIAxgEAIY8BAQDEAQAhkAEBAMQBACGSAQIAxgEAIQIAAAAEACAIAAAQACACAAAABAAgCAAAEAAgAwAAAAEAIA8AAAkAIBAAAA4AIAEAAAABACABAAAABAAgBRUAAIACACAWAACBAgAgFwAAhAIAIBgAAIMCACAZAACCAgAgCXAAALwBADBxAAAXABByAAC8AQAwcwIAnAEAIYkBQACzAQAhigECAJwBACGPAQEAnQEAIZABAQCdAQAhkgECAJwBACEDAAAABAAgAwAAFgAwFAAAFwAgAwAAAAQAIAMAAAUAMAQAAAEAIApwAAC6AQAwcQAAHQAQcgAAugEAMHMCAAAAAYkBQAC3AQAhigECAKgBACGOAQAAuwEAII8BAQCpAQAhkAEBAKkBACGRAQIAqAEAIQEAAAAaACABAAAAGgAgCXAAALoBADBxAAAdABByAAC6AQAwcwIAqAEAIYkBQAC3AQAhigECAKgBACGPAQEAqQEAIZABAQCpAQAhkQECAKgBACEAAwAAAB0AIAMAAB4AMAQAABoAIAMAAAAdACADAAAeADAEAAAaACADAAAAHQAgAwAAHgAwBAAAGgAgBnMCAAAAAYkBQAAAAAGKAQIAAAABjwEBAAAAAZABAQAAAAGRAQIAAAABAQgAACIAIAZzAgAAAAGJAUAAAAABigECAAAAAY8BAQAAAAGQAQEAAAABkQECAAAAAQEIAAAkADABCAAAJAAwBnMCAMYBACGJAUAA-gEAIYoBAgDGAQAhjwEBAMQBACGQAQEAxAEAIZEBAgDGAQAhAgAAABoAIAgAACcAIAZzAgDGAQAhiQFAAPoBACGKAQIAxgEAIY8BAQDEAQAhkAEBAMQBACGRAQIAxgEAIQIAAAAdACAIAAApACACAAAAHQAgCAAAKQAgAwAAABoAIA8AACIAIBAAACcAIAEAAAAaACABAAAAHQAgBRUAAPsBACAWAAD8AQAgFwAA_wEAIBgAAP4BACAZAAD9AQAgCXAAALkBADBxAAAwABByAAC5AQAwcwIAnAEAIYkBQACzAQAhigECAJwBACGPAQEAnQEAIZABAQCdAQAhkQECAJwBACEDAAAAHQAgAwAALwAwFAAAMAAgAwAAAB0AIAMAAB4AMAQAABoAIApwAAC2AQAwcQAANgAQcgAAtgEAMHMCAAAAAYkBQAC3AQAhigECAKgBACGLAQEAqQEAIYwBAQCpAQAhjQECAKgBACGOAQAAuAEAIAEAAAAzACABAAAAMwAgCXAAALYBADBxAAA2ABByAAC2AQAwcwIAqAEAIYkBQAC3AQAhigECAKgBACGLAQEAqQEAIYwBAQCpAQAhjQECAKgBACEAAwAAADYAIAMAADcAMAQAADMAIAMAAAA2ACADAAA3ADAEAAAzACADAAAANgAgAwAANwAwBAAAMwAgBnMCAAAAAYkBQAAAAAGKAQIAAAABiwEBAAAAAYwBAQAAAAGNAQIAAAABAQgAADsAIAZzAgAAAAGJAUAAAAABigECAAAAAYsBAQAAAAGMAQEAAAABjQECAAAAAQEIAAA9ADABCAAAPQAwBnMCAMYBACGJAUAA-gEAIYoBAgDGAQAhiwEBAMQBACGMAQEAxAEAIY0BAgDGAQAhAgAAADMAIAgAAEAAIAZzAgDGAQAhiQFAAPoBACGKAQIAxgEAIYsBAQDEAQAhjAEBAMQBACGNAQIAxgEAIQIAAAA2ACAIAABCACACAAAANgAgCAAAQgAgAwAAADMAIA8AADsAIBAAAEAAIAEAAAAzACABAAAANgAgBRUAAPUBACAWAAD2AQAgFwAA-QEAIBgAAPgBACAZAAD3AQAgCXAAALIBADBxAABJABByAACyAQAwcwIAnAEAIYkBQACzAQAhigECAJwBACGLAQEAnQEAIYwBAQCdAQAhjQECAJwBACEDAAAANgAgAwAASAAwFAAASQAgAwAAADYAIAMAADcAMAQAADMAIAg_AACqAQAgcAAApwEAMHEAAFkAEHIAAKcBADBzAgAAAAF1AQCpAQAhhAECAKgBACGIAQAAsQEAIAEAAABMACAIPQAArwEAID4AALABACBwAACuAQAwcQAATgAQcgAArgEAMHMCAKgBACF1AQCpAQAhgwECAKgBACECPQAA8wEAID4AAPQBACAIPQAArwEAID4AALABACBwAACuAQAwcQAATgAQcgAArgEAMHMCAAAAAXUBAKkBACGDAQIAqAEAIQMAAABOACADAABPADAEAABQACAJPAAArQEAIHAAAKsBADBxAABSABByAACrAQAwcwIAqAEAIXQCAKgBACF1AQCpAQAhdgEAqQEAIXcIAKwBACEBPAAA8gEAIAk8AACtAQAgcAAAqwEAMHEAAFIAEHIAAKsBADBzAgAAAAF0AgCoAQAhdQEAqQEAIXYBAKkBACF3CACsAQAhAwAAAFIAIAMAAFMAMAQAAFQAIAEAAABSACABAAAATgAgAQAAAEwAIAc_AACqAQAgcAAApwEAMHEAAFkAEHIAAKcBADBzAgCoAQAhdQEAqQEAIYQBAgCoAQAhAT8AAPEBACADAAAAWQAgAwAAWgAwBAAATAAgAwAAAFkAIAMAAFoAMAQAAEwAIAMAAABZACADAABaADAEAABMACAEPwAA8AEAIHMCAAAAAXUBAAAAAYQBAgAAAAEBCAAAXgAgA3MCAAAAAXUBAAAAAYQBAgAAAAEBCAAAYAAwAQgAAGAAMAQ_AADjAQAgcwIAxgEAIXUBAMQBACGEAQIAxgEAIQIAAABMACAIAABjACADcwIAxgEAIXUBAMQBACGEAQIAxgEAIQIAAABZACAIAABlACACAAAAWQAgCAAAZQAgAwAAAEwAIA8AAF4AIBAAAGMAIAEAAABMACABAAAAWQAgBRUAAN4BACAWAADfAQAgFwAA4gEAIBgAAOEBACAZAADgAQAgBnAAAKYBADBxAABsABByAACmAQAwcwIAnAEAIXUBAJ0BACGEAQIAnAEAIQMAAABZACADAABrADAUAABsACADAAAAWQAgAwAAWgAwBAAATAAgAQAAAFAAIAEAAABQACADAAAATgAgAwAATwAwBAAAUAAgAwAAAE4AIAMAAE8AMAQAAFAAIAMAAABOACADAABPADAEAABQACAFPQAA3AEAID4AAN0BACBzAgAAAAF1AQAAAAGDAQIAAAABAQgAAHQAIANzAgAAAAF1AQAAAAGDAQIAAAABAQgAAHYAMAEIAAB2ADAFPQAAzgEAID4AAM8BACBzAgDGAQAhdQEAxAEAIYMBAgDGAQAhAgAAAFAAIAgAAHkAIANzAgDGAQAhdQEAxAEAIYMBAgDGAQAhAgAAAE4AIAgAAHsAIAIAAABOACAIAAB7ACADAAAAUAAgDwAAdAAgEAAAeQAgAQAAAFAAIAEAAABOACAFFQAAyQEAIBYAAMoBACAXAADNAQAgGAAAzAEAIBkAAMsBACAGcAAApQEAMHEAAIIBABByAAClAQAwcwIAnAEAIXUBAJ0BACGDAQIAnAEAIQMAAABOACADAACBAQAwFAAAggEAIAMAAABOACADAABPADAEAABQACABAAAAVAAgAQAAAFQAIAMAAABSACADAABTADAEAABUACADAAAAUgAgAwAAUwAwBAAAVAAgAwAAAFIAIAMAAFMAMAQAAFQAIAY8AADIAQAgcwIAAAABdAIAAAABdQEAAAABdgEAAAABdwgAAAABAQgAAIoBACAFcwIAAAABdAIAAAABdQEAAAABdgEAAAABdwgAAAABAQgAAIwBADABCAAAjAEAMAY8AADHAQAgcwIAxgEAIXQCAMYBACF1AQDEAQAhdgEAxAEAIXcIAMUBACECAAAAVAAgCAAAjwEAIAVzAgDGAQAhdAIAxgEAIXUBAMQBACF2AQDEAQAhdwgAxQEAIQIAAABSACAIAACRAQAgAgAAAFIAIAgAAJEBACADAAAAVAAgDwAAigEAIBAAAI8BACABAAAAVAAgAQAAAFIAIAUVAAC_AQAgFgAAwAEAIBcAAMMBACAYAADCAQAgGQAAwQEAIAhwAACbAQAwcQAAmAEAEHIAAJsBADBzAgCcAQAhdAIAnAEAIXUBAJ0BACF2AQCdAQAhdwgAngEAIQMAAABSACADAACXAQAwFAAAmAEAIAMAAABSACADAABTADAEAABUACAIcAAAmwEAMHEAAJgBABByAACbAQAwcwIAnAEAIXQCAJwBACF1AQCdAQAhdgEAnQEAIXcIAJ4BACENFQAAoAEAIBYAAKEBACAXAACgAQAgGAAAoAEAIBkAAKABACB4AgAAAAF5AgAAAAR6AgAAAAR7AgAAAAF8AgAAAAF9AgAAAAF-AgAAAAF_AgCkAQAhDhUAAKABACAYAACjAQAgGQAAowEAIHgBAAAAAXkBAAAABHoBAAAABHsBAAAAAXwBAAAAAX0BAAAAAX4BAAAAAX8BAKIBACGAAQEAAAABgQEBAAAAAYIBAQAAAAENFQAAoAEAIBYAAKEBACAXAAChAQAgGAAAoQEAIBkAAKEBACB4CAAAAAF5CAAAAAR6CAAAAAR7CAAAAAF8CAAAAAF9CAAAAAF-CAAAAAF_CACfAQAhDRUAAKABACAWAAChAQAgFwAAoQEAIBgAAKEBACAZAAChAQAgeAgAAAABeQgAAAAEeggAAAAEewgAAAABfAgAAAABfQgAAAABfggAAAABfwgAnwEAIQh4AgAAAAF5AgAAAAR6AgAAAAR7AgAAAAF8AgAAAAF9AgAAAAF-AgAAAAF_AgCgAQAhCHgIAAAAAXkIAAAABHoIAAAABHsIAAAAAXwIAAAAAX0IAAAAAX4IAAAAAX8IAKEBACEOFQAAoAEAIBgAAKMBACAZAACjAQAgeAEAAAABeQEAAAAEegEAAAAEewEAAAABfAEAAAABfQEAAAABfgEAAAABfwEAogEAIYABAQAAAAGBAQEAAAABggEBAAAAAQt4AQAAAAF5AQAAAAR6AQAAAAR7AQAAAAF8AQAAAAF9AQAAAAF-AQAAAAF_AQCjAQAhgAEBAAAAAYEBAQAAAAGCAQEAAAABDRUAAKABACAWAAChAQAgFwAAoAEAIBgAAKABACAZAACgAQAgeAIAAAABeQIAAAAEegIAAAAEewIAAAABfAIAAAABfQIAAAABfgIAAAABfwIApAEAIQZwAAClAQAwcQAAggEAEHIAAKUBADBzAgCcAQAhdQEAnQEAIYMBAgCcAQAhBnAAAKYBADBxAABsABByAACmAQAwcwIAnAEAIXUBAJ0BACGEAQIAnAEAIQc_AACqAQAgcAAApwEAMHEAAFkAEHIAAKcBADBzAgCoAQAhdQEAqQEAIYQBAgCoAQAhCHgCAAAAAXkCAAAABHoCAAAABHsCAAAAAXwCAAAAAX0CAAAAAX4CAAAAAX8CAKABACELeAEAAAABeQEAAAAEegEAAAAEewEAAAABfAEAAAABfQEAAAABfgEAAAABfwEAowEAIYABAQAAAAGBAQEAAAABggEBAAAAAQOFAQAATgAghgEAAE4AIIcBAABOACAJPAAArQEAIHAAAKsBADBxAABSABByAACrAQAwcwIAqAEAIXQCAKgBACF1AQCpAQAhdgEAqQEAIXcIAKwBACEIeAgAAAABeQgAAAAEeggAAAAEewgAAAABfAgAAAABfQgAAAABfggAAAABfwgAoQEAIQo9AACvAQAgPgAAsAEAIHAAAK4BADBxAABOABByAACuAQAwcwIAqAEAIXUBAKkBACGDAQIAqAEAIZMBAABOACCUAQAATgAgCD0AAK8BACA-AACwAQAgcAAArgEAMHEAAE4AEHIAAK4BADBzAgCoAQAhdQEAqQEAIYMBAgCoAQAhA4UBAABSACCGAQAAUgAghwEAAFIAIAk_AACqAQAgcAAApwEAMHEAAFkAEHIAAKcBADBzAgCoAQAhdQEAqQEAIYQBAgCoAQAhkwEAAFkAIJQBAABZACACdQEAAAABhAECAAAAAQlwAACyAQAwcQAASQAQcgAAsgEAMHMCAJwBACGJAUAAswEAIYoBAgCcAQAhiwEBAJ0BACGMAQEAnQEAIY0BAgCcAQAhCxUAAKABACAYAAC1AQAgGQAAtQEAIHhAAAAAAXlAAAAABHpAAAAABHtAAAAAAXxAAAAAAX1AAAAAAX5AAAAAAX9AALQBACELFQAAoAEAIBgAALUBACAZAAC1AQAgeEAAAAABeUAAAAAEekAAAAAEe0AAAAABfEAAAAABfUAAAAABfkAAAAABf0AAtAEAIQh4QAAAAAF5QAAAAAR6QAAAAAR7QAAAAAF8QAAAAAF9QAAAAAF-QAAAAAF_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-ACABPAAhAT1WAAE_VwAAAAUVACgWACkXACoYACsZACwAAAAAAAUVACgWACkXACoYACsZACwBPgAgAT4AIAUVADEWADIXADMYADQZADUAAAAAAAUVADEWADIXADMYADQZADUBPAAhATwAIQUVADoWADsXADwYAD0ZAD4AAAAAAAUVADoWADsXADwYAD0ZAD4BAgECAwEFBgEGBwEHCAEJCgEKDAILDQMMDwENEQIOEgQREwESFAETFQIaGAUbGQscGwwdHAweHwwfIAwgIQwhIwwiJQIjJg0kKAwlKgImKw4nLAwoLQwpLgIqMQ8rMhUsNBYtNRYuOBYvORYwOhYxPBYyPgIzPxc0QRY1QwI2RBg3RRY4RhY5RwI6Shk7Sx9ATSBBWCBCWyBDXCBEXSBFXyBGYQJHYiVIZCBJZgJKZyZLaCBMaSBNagJObSdPbi1QbyFRcCFScSFTciFUcyFVdSFWdwJXeC5YeiFZfAJafS9bfiFcfyFdgAECXoMBMF-EATZghQEiYYYBImKHASJjiAEiZIkBImWLASJmjQECZ44BN2iQASJpkgECapMBOGuUASJslQEibZYBAm6ZATlvmgE_"
+}
 
+async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
+  const { Buffer } = await import('node:buffer')
+  const wasmArray = Buffer.from(wasmBase64, 'base64')
+  return new WebAssembly.Module(wasmArray)
+}
+
+config.compilerWasm = {
+  getRuntime: async () => await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.js"),
+
+  getQueryCompilerWasmModule: async () => {
+    const { wasm } = await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.wasm-base64.js")
+    return await decodeBase64AsWasm(wasm)
+  },
+
+  importName: "./query_compiler_fast_bg.js"
+}
 
 
 
@@ -84,12 +67,14 @@ export interface PrismaClientConstructor {
    * Type-safe database client for TypeScript
    * @example
    * ```
-   * const prisma = new PrismaClient()
+   * const prisma = new PrismaClient({
+   *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
+   * })
    * // Fetch zero or more RPRankings
    * const rPRankings = await prisma.rPRanking.findMany()
    * ```
    * 
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
+   * Read more in our [docs](https://pris.ly/d/client).
    */
 
   new <
@@ -97,7 +82,7 @@ export interface PrismaClientConstructor {
     LogOpts extends LogOptions<Options> = LogOptions<Options>,
     OmitOpts extends Prisma.PrismaClientOptions['omit'] = Options extends { omit: infer U } ? U : Prisma.PrismaClientOptions['omit'],
     ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs
-  >(options?: Prisma.Subset<Options, Prisma.PrismaClientOptions> ): PrismaClient<LogOpts, OmitOpts, ExtArgs>
+  >(options: Prisma.PrismaClientConstructorArgs<Options>): PrismaClient<LogOpts, OmitOpts, ExtArgs>
 }
 
 /**
@@ -106,12 +91,14 @@ export interface PrismaClientConstructor {
  * Type-safe database client for TypeScript
  * @example
  * ```
- * const prisma = new PrismaClient()
+ * const prisma = new PrismaClient({
+ *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
+ * })
  * // Fetch zero or more RPRankings
  * const rPRankings = await prisma.rPRanking.findMany()
  * ```
  * 
- * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
+ * Read more in our [docs](https://pris.ly/d/client).
  */
 
 export interface PrismaClient<
@@ -140,7 +127,7 @@ export interface PrismaClient<
    * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE email = ${'user@email.com'};`
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<number>;
 
@@ -152,7 +139,7 @@ export interface PrismaClient<
    * const result = await prisma.$executeRawUnsafe('UPDATE User SET cool = $1 WHERE email = $2 ;', true, 'user@email.com')
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>;
 
@@ -163,7 +150,7 @@ export interface PrismaClient<
    * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'user@email.com'};`
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<T>;
 
@@ -175,7 +162,7 @@ export interface PrismaClient<
    * const result = await prisma.$queryRawUnsafe('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'user@email.com')
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
 
@@ -191,12 +178,11 @@ export interface PrismaClient<
    * ])
    * ```
    * 
-   * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
+   * Read more in our [docs](https://www.prisma.io/docs/orm/prisma-client/queries/transactions).
    */
-  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): runtime.Types.Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
+  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): runtime.Types.Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
 
   $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => runtime.Types.Utils.JsPromise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): runtime.Types.Utils.JsPromise<R>
-
 
   $extends: runtime.Types.Extensions.ExtendsHook<"extends", Prisma.TypeMapCb<OmitOpts>, ExtArgs, runtime.Types.Utils.Call<Prisma.TypeMapCb<OmitOpts>, {
     extArgs: ExtArgs
@@ -263,7 +249,6 @@ export interface PrismaClient<
   get eventItem(): Prisma.EventItemDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
-export function getPrismaClientClass(dirname: string): PrismaClientConstructor {
-  config.dirname = dirname
+export function getPrismaClientClass(): PrismaClientConstructor {
   return runtime.getPrismaClient(config) as unknown as PrismaClientConstructor
 }

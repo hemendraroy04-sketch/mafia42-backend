@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import rankingRoutes from "./routes/ranking.routes";
 
 const app = express();
 
@@ -11,5 +12,7 @@ app.get("/", (_req, res) => {
     message: "Mafia42 API is running",
   });
 });
+
+app.use("/api/rankings", rankingRoutes);
 
 export default app;

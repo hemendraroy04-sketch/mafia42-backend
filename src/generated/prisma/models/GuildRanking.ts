@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/library"
+import type * as runtime from "@prisma/client/runtime/client"
 import type * as $Enums from "../enums.js"
 import type * as Prisma from "../internal/prismaNamespace.js"
 
@@ -207,7 +207,7 @@ export type GuildRankingGroupByOutputType = {
   _max: GuildRankingMaxAggregateOutputType | null
 }
 
-type GetGuildRankingGroupByPayload<T extends GuildRankingGroupByArgs> = Prisma.PrismaPromise<
+export type GetGuildRankingGroupByPayload<T extends GuildRankingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<GuildRankingGroupByOutputType, T['by']> &
       {
@@ -1041,6 +1041,11 @@ export type GuildRankingFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` GuildRankings.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of GuildRankings.
+   */
   distinct?: Prisma.GuildRankingScalarFieldEnum | Prisma.GuildRankingScalarFieldEnum[]
 }
 
