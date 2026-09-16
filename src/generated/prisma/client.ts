@@ -29,8 +29,8 @@ export * from "./enums.js"
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more RPRankings
+ * const rPRankings = await prisma.rPRanking.findMany()
  * ```
  * 
  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
@@ -44,4 +44,33 @@ export { Prisma }
 path.join(__dirname, "query_engine-windows.dll.node")
 path.join(process.cwd(), "src/generated/prisma/query_engine-windows.dll.node")
 
-
+/**
+ * Model RPRanking
+ * 
+ */
+export type RPRanking = Prisma.RPRankingModel
+/**
+ * Model FameRanking
+ * 
+ */
+export type FameRanking = Prisma.FameRankingModel
+/**
+ * Model GuildRanking
+ * 
+ */
+export type GuildRanking = Prisma.GuildRankingModel
+/**
+ * Model Event
+ * 
+ */
+export type Event = Prisma.EventModel
+/**
+ * Model EventBox
+ * 
+ */
+export type EventBox = Prisma.EventBoxModel
+/**
+ * Model EventItem
+ * 
+ */
+export type EventItem = Prisma.EventItemModel

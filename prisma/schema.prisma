@@ -7,3 +7,71 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model RPRanking {
+  id         Int      @id @default(autoincrement())
+  date       DateTime
+  rank       Int
+  playerId   String
+  playerName String
+  rp         Int
+
+  @@unique([date, rank])
+  @@index([date])
+}
+
+model FameRanking {
+  id         Int      @id @default(autoincrement())
+  date       DateTime
+  rank       Int
+  playerId   String
+  playerName String
+  fame       Int
+
+  @@unique([date, rank])
+  @@index([date])
+}
+
+model GuildRanking {
+  id        Int      @id @default(autoincrement())
+  date      DateTime
+  rank      Int
+  guildId   String
+  guildName String
+  gp        Int
+
+  @@unique([date, rank])
+  @@index([date])
+}
+
+model Event {
+  id    Int         @id @default(autoincrement())
+  name  String
+  year  Int
+  boxes EventBox[]
+
+  @@unique([name, year])
+}
+
+model EventBox {
+  id      Int         @id @default(autoincrement())
+  eventId Int
+  name    String
+  items   EventItem[]
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@index([eventId])
+}
+
+model EventItem {
+  id          Int      @id @default(autoincrement())
+  boxId       Int
+  name        String
+  image       String
+  probability Float
+
+  box EventBox @relation(fields: [boxId], references: [id], onDelete: Cascade)
+
+  @@index([boxId])
+}

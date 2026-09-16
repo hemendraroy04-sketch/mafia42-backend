@@ -49,7 +49,12 @@ export const AnyNull = runtime.objectEnumValues.instances.AnyNull
 
 
 export const ModelName = {
-
+  RPRanking: 'RPRanking',
+  FameRanking: 'FameRanking',
+  GuildRanking: 'GuildRanking',
+  Event: 'Event',
+  EventBox: 'EventBox',
+  EventItem: 'EventItem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -66,4 +71,85 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const RPRankingScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  rank: 'rank',
+  playerId: 'playerId',
+  playerName: 'playerName',
+  rp: 'rp'
+} as const
+
+export type RPRankingScalarFieldEnum = (typeof RPRankingScalarFieldEnum)[keyof typeof RPRankingScalarFieldEnum]
+
+
+export const FameRankingScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  rank: 'rank',
+  playerId: 'playerId',
+  playerName: 'playerName',
+  fame: 'fame'
+} as const
+
+export type FameRankingScalarFieldEnum = (typeof FameRankingScalarFieldEnum)[keyof typeof FameRankingScalarFieldEnum]
+
+
+export const GuildRankingScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  rank: 'rank',
+  guildId: 'guildId',
+  guildName: 'guildName',
+  gp: 'gp'
+} as const
+
+export type GuildRankingScalarFieldEnum = (typeof GuildRankingScalarFieldEnum)[keyof typeof GuildRankingScalarFieldEnum]
+
+
+export const EventScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  year: 'year'
+} as const
+
+export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
+
+
+export const EventBoxScalarFieldEnum = {
+  id: 'id',
+  eventId: 'eventId',
+  name: 'name'
+} as const
+
+export type EventBoxScalarFieldEnum = (typeof EventBoxScalarFieldEnum)[keyof typeof EventBoxScalarFieldEnum]
+
+
+export const EventItemScalarFieldEnum = {
+  id: 'id',
+  boxId: 'boxId',
+  name: 'name',
+  image: 'image',
+  probability: 'probability'
+} as const
+
+export type EventItemScalarFieldEnum = (typeof EventItemScalarFieldEnum)[keyof typeof EventItemScalarFieldEnum]
+
+
+export const SortOrder = {
+  asc: 'asc',
+  desc: 'desc'
+} as const
+
+export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 

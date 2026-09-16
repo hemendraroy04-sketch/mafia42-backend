@@ -17,4 +17,33 @@ import * as Prisma from './internal/prismaNamespaceBrowser.js'
 export { Prisma }
 export * as $Enums from './enums.js'
 export * from './enums.js';
-
+/**
+ * Model RPRanking
+ * 
+ */
+export type RPRanking = Prisma.RPRankingModel
+/**
+ * Model FameRanking
+ * 
+ */
+export type FameRanking = Prisma.FameRankingModel
+/**
+ * Model GuildRanking
+ * 
+ */
+export type GuildRanking = Prisma.GuildRankingModel
+/**
+ * Model Event
+ * 
+ */
+export type Event = Prisma.EventModel
+/**
+ * Model EventBox
+ * 
+ */
+export type EventBox = Prisma.EventBoxModel
+/**
+ * Model EventItem
+ * 
+ */
+export type EventItem = Prisma.EventItemModel
