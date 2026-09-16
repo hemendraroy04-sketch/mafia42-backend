@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import rankingRoutes from "./routes/ranking.routes";
+import eventRoutes from "./routes/event.routes.js";
 
 const app = express();
 
@@ -14,5 +15,6 @@ app.get("/", (_req, res) => {
 });
 
 app.use("/api/rankings", rankingRoutes);
+app.use("/api/events", eventRoutes);
 
 export default app;
