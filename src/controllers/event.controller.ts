@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getEvents, getEventById } from "../services/event.service.js";
+import { getEvents, getEventById, createEvent } from "../services/event.service.js";
 
 export const getAllEvents = async (_req: Request, res: Response) => {
   try {
@@ -29,5 +29,53 @@ export const getEvent = async (req: Request, res: Response) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Failed to fetch event" });
+  }
+};
+
+export const createNewEvent = async (req: Request, res: Response) => {
+  try {
+    const { name, year, boxes } = req.body;
+
+    if (!name || !year || !Array.isArray(boxes)) {
+      return res.status(400).json({
+        message: "name, year and boxes are required",
+      });
+    }
+
+    if (boxes.length !== 4) {
+      return res.status(400).json({
+        message: "Exactly 4 boxes are required",
+      });
+    }
+
+    for (const box of boxes) {
+      if (!box.name || !Array.isArray(box.items)) {
+        return res.status(400).json({
+          message: "Each box must have a name and items",
+        });
+      }
+
+      for (const item of box.items) {
+        if (!item.name || !item.image || typeof item.probability !== "number" ) {
+          return res.status(400).json({
+            message: "Each item must have a name, image and probability",
+          });
+        }
+      }
+    }
+
+    const event = await createEvent({ name, year, boxes });
+
+    return res.status(201).json({
+      message: "Event created successfully",
+      event,
+    });
+  }
+  catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Failed to create event",
+    });
   }
 };
