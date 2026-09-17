@@ -191,7 +191,7 @@ export type EventItemGroupByOutputType = {
   id: number
   boxId: number
   name: string
-  image: string
+  image: string | null
   probability: number
   _count: EventItemCountAggregateOutputType | null
   _avg: EventItemAvgAggregateOutputType | null
@@ -222,7 +222,7 @@ export type EventItemWhereInput = {
   id?: Prisma.IntFilter<"EventItem"> | number
   boxId?: Prisma.IntFilter<"EventItem"> | number
   name?: Prisma.StringFilter<"EventItem"> | string
-  image?: Prisma.StringFilter<"EventItem"> | string
+  image?: Prisma.StringNullableFilter<"EventItem"> | string | null
   probability?: Prisma.FloatFilter<"EventItem"> | number
   box?: Prisma.XOR<Prisma.EventBoxScalarRelationFilter, Prisma.EventBoxWhereInput>
 }
@@ -231,7 +231,7 @@ export type EventItemOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   boxId?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  image?: Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   probability?: Prisma.SortOrder
   box?: Prisma.EventBoxOrderByWithRelationInput
 }
@@ -243,7 +243,7 @@ export type EventItemWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.EventItemWhereInput | Prisma.EventItemWhereInput[]
   boxId?: Prisma.IntFilter<"EventItem"> | number
   name?: Prisma.StringFilter<"EventItem"> | string
-  image?: Prisma.StringFilter<"EventItem"> | string
+  image?: Prisma.StringNullableFilter<"EventItem"> | string | null
   probability?: Prisma.FloatFilter<"EventItem"> | number
   box?: Prisma.XOR<Prisma.EventBoxScalarRelationFilter, Prisma.EventBoxWhereInput>
 }, "id">
@@ -252,7 +252,7 @@ export type EventItemOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   boxId?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  image?: Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   probability?: Prisma.SortOrder
   _count?: Prisma.EventItemCountOrderByAggregateInput
   _avg?: Prisma.EventItemAvgOrderByAggregateInput
@@ -268,13 +268,13 @@ export type EventItemScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"EventItem"> | number
   boxId?: Prisma.IntWithAggregatesFilter<"EventItem"> | number
   name?: Prisma.StringWithAggregatesFilter<"EventItem"> | string
-  image?: Prisma.StringWithAggregatesFilter<"EventItem"> | string
+  image?: Prisma.StringNullableWithAggregatesFilter<"EventItem"> | string | null
   probability?: Prisma.FloatWithAggregatesFilter<"EventItem"> | number
 }
 
 export type EventItemCreateInput = {
   name: string
-  image: string
+  image?: string | null
   probability: number
   box: Prisma.EventBoxCreateNestedOneWithoutItemsInput
 }
@@ -283,13 +283,13 @@ export type EventItemUncheckedCreateInput = {
   id?: number
   boxId: number
   name: string
-  image: string
+  image?: string | null
   probability: number
 }
 
 export type EventItemUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   probability?: Prisma.FloatFieldUpdateOperationsInput | number
   box?: Prisma.EventBoxUpdateOneRequiredWithoutItemsNestedInput
 }
@@ -298,7 +298,7 @@ export type EventItemUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   boxId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   probability?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -306,13 +306,13 @@ export type EventItemCreateManyInput = {
   id?: number
   boxId: number
   name: string
-  image: string
+  image?: string | null
   probability: number
 }
 
 export type EventItemUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   probability?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -320,7 +320,7 @@ export type EventItemUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   boxId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   probability?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -412,6 +412,10 @@ export type EventItemUncheckedUpdateManyWithoutBoxNestedInput = {
   deleteMany?: Prisma.EventItemScalarWhereInput | Prisma.EventItemScalarWhereInput[]
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
 export type FloatFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -422,14 +426,14 @@ export type FloatFieldUpdateOperationsInput = {
 
 export type EventItemCreateWithoutBoxInput = {
   name: string
-  image: string
+  image?: string | null
   probability: number
 }
 
 export type EventItemUncheckedCreateWithoutBoxInput = {
   id?: number
   name: string
-  image: string
+  image?: string | null
   probability: number
 }
 
@@ -466,34 +470,34 @@ export type EventItemScalarWhereInput = {
   id?: Prisma.IntFilter<"EventItem"> | number
   boxId?: Prisma.IntFilter<"EventItem"> | number
   name?: Prisma.StringFilter<"EventItem"> | string
-  image?: Prisma.StringFilter<"EventItem"> | string
+  image?: Prisma.StringNullableFilter<"EventItem"> | string | null
   probability?: Prisma.FloatFilter<"EventItem"> | number
 }
 
 export type EventItemCreateManyBoxInput = {
   id?: number
   name: string
-  image: string
+  image?: string | null
   probability: number
 }
 
 export type EventItemUpdateWithoutBoxInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   probability?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type EventItemUncheckedUpdateWithoutBoxInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   probability?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type EventItemUncheckedUpdateManyWithoutBoxInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   probability?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -554,7 +558,7 @@ export type $EventItemPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     id: number
     boxId: number
     name: string
-    image: string
+    image: string | null
     probability: number
   }, ExtArgs["result"]["eventItem"]>
   composites: {}

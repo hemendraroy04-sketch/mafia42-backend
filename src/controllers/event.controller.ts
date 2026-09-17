@@ -56,9 +56,9 @@ export const createNewEvent = async (req: Request, res: Response) => {
       }
 
       for (const item of box.items) {
-        if (!item.name || !item.image || typeof item.probability !== "number" ) {
+        if (!item.name || typeof item.probability !== "number" ) {
           return res.status(400).json({
-            message: "Each item must have a name, image and probability",
+            message: "Each item must have a name and probability",
           });
         }
       }

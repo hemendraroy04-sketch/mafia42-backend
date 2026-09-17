@@ -1,6 +1,6 @@
 export interface CreateEventItem {
   name: string;
-  image: string;
+  image?: string;
   probability: number;
 }
 
