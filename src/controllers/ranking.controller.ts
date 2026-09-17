@@ -2,10 +2,13 @@ import { Request, Response } from "express";
 import {
   addRPRanking,
   getLatestRPRanking,
+  getRPRankingByDate,
   addFameRanking,
   getLatestFameRanking,
+  getFameRankingByDate,
   addGuildRanking,
   getLatestGuildRanking,
+  getGuildRankingByDate,
 } from "../services/ranking.service.js";
 
 // Helper to validate incoming payload
@@ -20,6 +23,21 @@ const validateRankingInput = (date: any, rankings: any) => {
     return "Invalid date";
   }
   return null;
+};
+
+// Helper to parse query date
+const parseQueryDate = (date: unknown) => {
+  if (typeof date !== "string" || !date) {
+    return null;
+  }
+
+  const parsedDate = new Date(`${date}T00:00:00.000Z`);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    return null;
+  }
+
+  return parsedDate;
 };
 
 // RP ranking
@@ -38,8 +56,21 @@ export const createRPRanking = async (req: Request, res: Response) => {
   }
 };
 
-export const getRPRanking = async (_req: Request, res: Response) => {
+export const getRPRanking = async (req: Request, res: Response) => {
   try {
+    const { date } = req.query;
+
+    if (date !== undefined) {
+      const parsedDate = parseQueryDate(date);
+
+      if (!parsedDate) {
+        return res.status(400).json({ message: "Invalid date" });
+      }
+
+      const result = await getRPRankingByDate(parsedDate);
+      return res.status(200).json(result);
+    }
+
     const result = await getLatestRPRanking();
     return res.status(200).json(result);
   } catch (error) {
@@ -64,8 +95,21 @@ export const createFameRanking = async (req: Request, res: Response) => {
   }
 };
 
-export const getFameRanking = async (_req: Request, res: Response) => {
+export const getFameRanking = async (req: Request, res: Response) => {
   try {
+    const { date } = req.query;
+
+    if (date !== undefined) {
+      const parsedDate = parseQueryDate(date);
+
+      if (!parsedDate) {
+        return res.status(400).json({ message: "Invalid date" });
+      }
+
+      const result = await getFameRankingByDate(parsedDate);
+      return res.status(200).json(result);
+    }
+
     const result = await getLatestFameRanking();
     return res.status(200).json(result);
   } catch (error) {
@@ -90,8 +134,21 @@ export const createGuildRanking = async (req: Request, res: Response) => {
   }
 };
 
-export const getGuildRanking = async (_req: Request, res: Response) => {
+export const getGuildRanking = async (req: Request, res: Response) => {
   try {
+    const { date } = req.query;
+
+    if (date !== undefined) {
+      const parsedDate = parseQueryDate(date);
+
+      if (!parsedDate) {
+        return res.status(400).json({ message: "Invalid date" });
+      }
+
+      const result = await getGuildRankingByDate(parsedDate);
+      return res.status(200).json(result);
+    }
+
     const result = await getLatestGuildRanking();
     return res.status(200).json(result);
   } catch (error) {
