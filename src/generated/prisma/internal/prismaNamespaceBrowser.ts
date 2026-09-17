@@ -114,7 +114,9 @@ export type GuildRankingScalarFieldEnum = (typeof GuildRankingScalarFieldEnum)[k
 export const EventScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  year: 'year'
+  year: 'year',
+  month: 'month',
+  image: 'image'
 } as const
 
 export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]

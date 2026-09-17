@@ -29,29 +29,37 @@ export type AggregateEvent = {
 export type EventAvgAggregateOutputType = {
   id: number | null
   year: number | null
+  month: number | null
 }
 
 export type EventSumAggregateOutputType = {
   id: number | null
   year: number | null
+  month: number | null
 }
 
 export type EventMinAggregateOutputType = {
   id: number | null
   name: string | null
   year: number | null
+  month: number | null
+  image: string | null
 }
 
 export type EventMaxAggregateOutputType = {
   id: number | null
   name: string | null
   year: number | null
+  month: number | null
+  image: string | null
 }
 
 export type EventCountAggregateOutputType = {
   id: number
   name: number
   year: number
+  month: number
+  image: number
   _all: number
 }
 
@@ -59,29 +67,37 @@ export type EventCountAggregateOutputType = {
 export type EventAvgAggregateInputType = {
   id?: true
   year?: true
+  month?: true
 }
 
 export type EventSumAggregateInputType = {
   id?: true
   year?: true
+  month?: true
 }
 
 export type EventMinAggregateInputType = {
   id?: true
   name?: true
   year?: true
+  month?: true
+  image?: true
 }
 
 export type EventMaxAggregateInputType = {
   id?: true
   name?: true
   year?: true
+  month?: true
+  image?: true
 }
 
 export type EventCountAggregateInputType = {
   id?: true
   name?: true
   year?: true
+  month?: true
+  image?: true
   _all?: true
 }
 
@@ -175,6 +191,8 @@ export type EventGroupByOutputType = {
   id: number
   name: string
   year: number
+  month: number
+  image: string
   _count: EventCountAggregateOutputType | null
   _avg: EventAvgAggregateOutputType | null
   _sum: EventSumAggregateOutputType | null
@@ -204,6 +222,8 @@ export type EventWhereInput = {
   id?: Prisma.IntFilter<"Event"> | number
   name?: Prisma.StringFilter<"Event"> | string
   year?: Prisma.IntFilter<"Event"> | number
+  month?: Prisma.IntFilter<"Event"> | number
+  image?: Prisma.StringFilter<"Event"> | string
   boxes?: Prisma.EventBoxListRelationFilter
 }
 
@@ -211,24 +231,30 @@ export type EventOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   year?: Prisma.SortOrder
+  month?: Prisma.SortOrder
+  image?: Prisma.SortOrder
   boxes?: Prisma.EventBoxOrderByRelationAggregateInput
 }
 
 export type EventWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  name_year?: Prisma.EventNameYearCompoundUniqueInput
+  name_year_month?: Prisma.EventNameYearMonthCompoundUniqueInput
   AND?: Prisma.EventWhereInput | Prisma.EventWhereInput[]
   OR?: Prisma.EventWhereInput[]
   NOT?: Prisma.EventWhereInput | Prisma.EventWhereInput[]
   name?: Prisma.StringFilter<"Event"> | string
   year?: Prisma.IntFilter<"Event"> | number
+  month?: Prisma.IntFilter<"Event"> | number
+  image?: Prisma.StringFilter<"Event"> | string
   boxes?: Prisma.EventBoxListRelationFilter
-}, "id" | "name_year">
+}, "id" | "name_year_month">
 
 export type EventOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   year?: Prisma.SortOrder
+  month?: Prisma.SortOrder
+  image?: Prisma.SortOrder
   _count?: Prisma.EventCountOrderByAggregateInput
   _avg?: Prisma.EventAvgOrderByAggregateInput
   _max?: Prisma.EventMaxOrderByAggregateInput
@@ -243,11 +269,15 @@ export type EventScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Event"> | number
   name?: Prisma.StringWithAggregatesFilter<"Event"> | string
   year?: Prisma.IntWithAggregatesFilter<"Event"> | number
+  month?: Prisma.IntWithAggregatesFilter<"Event"> | number
+  image?: Prisma.StringWithAggregatesFilter<"Event"> | string
 }
 
 export type EventCreateInput = {
   name: string
   year: number
+  month: number
+  image: string
   boxes?: Prisma.EventBoxCreateNestedManyWithoutEventInput
 }
 
@@ -255,12 +285,16 @@ export type EventUncheckedCreateInput = {
   id?: number
   name: string
   year: number
+  month: number
+  image: string
   boxes?: Prisma.EventBoxUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
+  month?: Prisma.IntFieldUpdateOperationsInput | number
+  image?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.EventBoxUpdateManyWithoutEventNestedInput
 }
 
@@ -268,6 +302,8 @@ export type EventUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
+  month?: Prisma.IntFieldUpdateOperationsInput | number
+  image?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.EventBoxUncheckedUpdateManyWithoutEventNestedInput
 }
 
@@ -275,50 +311,65 @@ export type EventCreateManyInput = {
   id?: number
   name: string
   year: number
+  month: number
+  image: string
 }
 
 export type EventUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
+  month?: Prisma.IntFieldUpdateOperationsInput | number
+  image?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type EventUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
+  month?: Prisma.IntFieldUpdateOperationsInput | number
+  image?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
-export type EventNameYearCompoundUniqueInput = {
+export type EventNameYearMonthCompoundUniqueInput = {
   name: string
   year: number
+  month: number
 }
 
 export type EventCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   year?: Prisma.SortOrder
+  month?: Prisma.SortOrder
+  image?: Prisma.SortOrder
 }
 
 export type EventAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   year?: Prisma.SortOrder
+  month?: Prisma.SortOrder
 }
 
 export type EventMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   year?: Prisma.SortOrder
+  month?: Prisma.SortOrder
+  image?: Prisma.SortOrder
 }
 
 export type EventMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   year?: Prisma.SortOrder
+  month?: Prisma.SortOrder
+  image?: Prisma.SortOrder
 }
 
 export type EventSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   year?: Prisma.SortOrder
+  month?: Prisma.SortOrder
 }
 
 export type EventScalarRelationFilter = {
@@ -343,12 +394,16 @@ export type EventUpdateOneRequiredWithoutBoxesNestedInput = {
 export type EventCreateWithoutBoxesInput = {
   name: string
   year: number
+  month: number
+  image: string
 }
 
 export type EventUncheckedCreateWithoutBoxesInput = {
   id?: number
   name: string
   year: number
+  month: number
+  image: string
 }
 
 export type EventCreateOrConnectWithoutBoxesInput = {
@@ -370,12 +425,16 @@ export type EventUpdateToOneWithWhereWithoutBoxesInput = {
 export type EventUpdateWithoutBoxesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
+  month?: Prisma.IntFieldUpdateOperationsInput | number
+  image?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type EventUncheckedUpdateWithoutBoxesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
+  month?: Prisma.IntFieldUpdateOperationsInput | number
+  image?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -413,6 +472,8 @@ export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   id?: boolean
   name?: boolean
   year?: boolean
+  month?: boolean
+  image?: boolean
   boxes?: boolean | Prisma.Event$boxesArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
@@ -421,21 +482,27 @@ export type EventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   name?: boolean
   year?: boolean
+  month?: boolean
+  image?: boolean
 }, ExtArgs["result"]["event"]>
 
 export type EventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   year?: boolean
+  month?: boolean
+  image?: boolean
 }, ExtArgs["result"]["event"]>
 
 export type EventSelectScalar = {
   id?: boolean
   name?: boolean
   year?: boolean
+  month?: boolean
+  image?: boolean
 }
 
-export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "year", ExtArgs["result"]["event"]>
+export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "year" | "month" | "image", ExtArgs["result"]["event"]>
 export type EventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   boxes?: boolean | Prisma.Event$boxesArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
@@ -452,6 +519,8 @@ export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     id: number
     name: string
     year: number
+    month: number
+    image: string
   }, ExtArgs["result"]["event"]>
   composites: {}
 }
@@ -879,6 +948,8 @@ export interface EventFieldRefs {
   readonly id: Prisma.FieldRef<"Event", 'Int'>
   readonly name: Prisma.FieldRef<"Event", 'String'>
   readonly year: Prisma.FieldRef<"Event", 'Int'>
+  readonly month: Prisma.FieldRef<"Event", 'Int'>
+  readonly image: Prisma.FieldRef<"Event", 'String'>
 }
     
 
