@@ -47,13 +47,15 @@ model Event {
   id    Int         @id @default(autoincrement())
   name  String
   year  Int
+  month Int
+  image String
   boxes EventBox[]
 
-  @@unique([name, year])
+  @@unique([name, year, month])
 }
 
 model EventBox {
-  id      Int         @id @default(autoincrement())
+  id      Int      @id @default(autoincrement())
   eventId Int
   name    String
   items   EventItem[]

@@ -13,4 +13,6 @@ export interface CreateEventInput {
   name: string;
   year: number;
   boxes: CreateEventBox[];
+  image: string;
+  month: number;
 }

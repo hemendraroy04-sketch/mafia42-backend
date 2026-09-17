@@ -10,11 +10,13 @@ const includeBoxesWithItems = {
 
 export const getEvents = async () => {
   return prisma.event.findMany({
-    orderBy: [{ year: "desc" }, { name: "asc" }],
+    orderBy: [{ year: "desc" }, { month: "desc" }],
     select: {
       id: true,
       name: true,
       year: true,
+      month: true,
+      image: true
     },
   });
 };
@@ -31,6 +33,8 @@ export const createEvent = async (data: CreateEventInput) => {
     data: {
       name: data.name,
       year: data.year,
+      month: data.month,
+      image: data.image,
       boxes: {
         create: data.boxes.map((box) => ({
           name: box.name,
@@ -44,26 +48,4 @@ export const createEvent = async (data: CreateEventInput) => {
     },
     include: { boxes: { include: { items: true } } },
   });
-};
-
-export const openEventBox = async (eventId: number, boxId: number) => {
-  const box = await prisma.eventBox.findFirst({
-    where: { id: boxId, eventId },
-    include: { items: true },
-  });
-
-  if (!box) return null;
-  if (box.items.length === 0) throw new Error("Box has no items");
-  const totalProbability = box.items.reduce((sum, item) => sum + item.probability, 0);
-  if (totalProbability <= 0) throw new Error("Invalid item probabilities");
-  const random = Math.random() * totalProbability;
-
-  let cumulativeProbability = 0;
-
-  for (const item of box.items) {
-    cumulativeProbability += item.probability;
-    if (random < cumulativeProbability) return item;
-  }
-
-  return box.items[box.items.length - 1];
 };

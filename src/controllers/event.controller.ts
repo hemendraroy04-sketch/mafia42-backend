@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getEvents, getEventById, createEvent, openEventBox } from "../services/event.service.js";
+import { getEvents, getEventById, createEvent } from "../services/event.service.js";
 
 export const getAllEvents = async (_req: Request, res: Response) => {
   try {
@@ -34,11 +34,11 @@ export const getEvent = async (req: Request, res: Response) => {
 
 export const createNewEvent = async (req: Request, res: Response) => {
   try {
-    const { name, year, boxes } = req.body;
+    const { name, year, month, boxes, image } = req.body;
 
-    if (!name || !year || !Array.isArray(boxes)) {
+    if (!name || !year || !month || !image || !Array.isArray(boxes)) {
       return res.status(400).json({
-        message: "name, year and boxes are required",
+        message: "name, year, image and boxes are required",
       });
     }
 
@@ -64,7 +64,7 @@ export const createNewEvent = async (req: Request, res: Response) => {
       }
     }
 
-    const event = await createEvent({ name, year, boxes });
+    const event = await createEvent({ name, year, month, boxes, image });
 
     return res.status(201).json({
       message: "Event created successfully",
@@ -76,36 +76,6 @@ export const createNewEvent = async (req: Request, res: Response) => {
 
     return res.status(500).json({
       message: "Failed to create event",
-    });
-  }
-};
-
-export const openBox = async (req: Request, res: Response) => {
-  try {
-    const eventId = Number(req.params.eventId);
-    const boxId = Number(req.params.boxId);
-
-    if (Number.isNaN(eventId) || Number.isNaN(boxId)) {
-      return res.status(400).json({
-        message: "Invalid event ID or box ID",
-      });
-    }
-
-    const item = await openEventBox(eventId, boxId);
-
-    if (!item) {
-      return res.status(404).json({
-        message: "Event or box not found",
-      });
-    }
-
-    return res.status(200).json({item}); 
-  }
-  catch (error) {
-    console.error(error);
-
-    return res.status(500).json({
-      message: "Failed to open box",
     });
   }
 };
