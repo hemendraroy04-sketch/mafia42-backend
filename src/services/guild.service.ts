@@ -10,3 +10,10 @@ export const createGuild = async (data: CreateGuildInput) => {
     },
   });
 };
+
+export const updateGuildCountry = async (name: string, country: string) => {
+  return prisma.guild.update({
+    where: { name },
+    data: { country },
+  });
+};
