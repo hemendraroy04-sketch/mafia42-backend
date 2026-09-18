@@ -29,12 +29,14 @@ export type AggregateRPRanking = {
 export type RPRankingAvgAggregateOutputType = {
   id: number | null
   rank: number | null
+  playerId: number | null
   rp: number | null
 }
 
 export type RPRankingSumAggregateOutputType = {
   id: number | null
   rank: number | null
+  playerId: number | null
   rp: number | null
 }
 
@@ -42,8 +44,7 @@ export type RPRankingMinAggregateOutputType = {
   id: number | null
   date: Date | null
   rank: number | null
-  playerId: string | null
-  playerName: string | null
+  playerId: number | null
   rp: number | null
 }
 
@@ -51,8 +52,7 @@ export type RPRankingMaxAggregateOutputType = {
   id: number | null
   date: Date | null
   rank: number | null
-  playerId: string | null
-  playerName: string | null
+  playerId: number | null
   rp: number | null
 }
 
@@ -61,7 +61,6 @@ export type RPRankingCountAggregateOutputType = {
   date: number
   rank: number
   playerId: number
-  playerName: number
   rp: number
   _all: number
 }
@@ -70,12 +69,14 @@ export type RPRankingCountAggregateOutputType = {
 export type RPRankingAvgAggregateInputType = {
   id?: true
   rank?: true
+  playerId?: true
   rp?: true
 }
 
 export type RPRankingSumAggregateInputType = {
   id?: true
   rank?: true
+  playerId?: true
   rp?: true
 }
 
@@ -84,7 +85,6 @@ export type RPRankingMinAggregateInputType = {
   date?: true
   rank?: true
   playerId?: true
-  playerName?: true
   rp?: true
 }
 
@@ -93,7 +93,6 @@ export type RPRankingMaxAggregateInputType = {
   date?: true
   rank?: true
   playerId?: true
-  playerName?: true
   rp?: true
 }
 
@@ -102,7 +101,6 @@ export type RPRankingCountAggregateInputType = {
   date?: true
   rank?: true
   playerId?: true
-  playerName?: true
   rp?: true
   _all?: true
 }
@@ -197,8 +195,7 @@ export type RPRankingGroupByOutputType = {
   id: number
   date: Date
   rank: number
-  playerId: string
-  playerName: string
+  playerId: number
   rp: number
   _count: RPRankingCountAggregateOutputType | null
   _avg: RPRankingAvgAggregateOutputType | null
@@ -229,9 +226,9 @@ export type RPRankingWhereInput = {
   id?: Prisma.IntFilter<"RPRanking"> | number
   date?: Prisma.DateTimeFilter<"RPRanking"> | Date | string
   rank?: Prisma.IntFilter<"RPRanking"> | number
-  playerId?: Prisma.StringFilter<"RPRanking"> | string
-  playerName?: Prisma.StringFilter<"RPRanking"> | string
+  playerId?: Prisma.IntFilter<"RPRanking"> | number
   rp?: Prisma.IntFilter<"RPRanking"> | number
+  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
 }
 
 export type RPRankingOrderByWithRelationInput = {
@@ -239,29 +236,29 @@ export type RPRankingOrderByWithRelationInput = {
   date?: Prisma.SortOrder
   rank?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  playerName?: Prisma.SortOrder
   rp?: Prisma.SortOrder
+  player?: Prisma.PlayerOrderByWithRelationInput
 }
 
 export type RPRankingWhereUniqueInput = Prisma.AtLeast<{
   id?: number
   date_rank?: Prisma.RPRankingDateRankCompoundUniqueInput
+  date_playerId?: Prisma.RPRankingDatePlayerIdCompoundUniqueInput
   AND?: Prisma.RPRankingWhereInput | Prisma.RPRankingWhereInput[]
   OR?: Prisma.RPRankingWhereInput[]
   NOT?: Prisma.RPRankingWhereInput | Prisma.RPRankingWhereInput[]
   date?: Prisma.DateTimeFilter<"RPRanking"> | Date | string
   rank?: Prisma.IntFilter<"RPRanking"> | number
-  playerId?: Prisma.StringFilter<"RPRanking"> | string
-  playerName?: Prisma.StringFilter<"RPRanking"> | string
+  playerId?: Prisma.IntFilter<"RPRanking"> | number
   rp?: Prisma.IntFilter<"RPRanking"> | number
-}, "id" | "date_rank">
+  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
+}, "id" | "date_rank" | "date_playerId">
 
 export type RPRankingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
   rank?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  playerName?: Prisma.SortOrder
   rp?: Prisma.SortOrder
   _count?: Prisma.RPRankingCountOrderByAggregateInput
   _avg?: Prisma.RPRankingAvgOrderByAggregateInput
@@ -277,42 +274,37 @@ export type RPRankingScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"RPRanking"> | number
   date?: Prisma.DateTimeWithAggregatesFilter<"RPRanking"> | Date | string
   rank?: Prisma.IntWithAggregatesFilter<"RPRanking"> | number
-  playerId?: Prisma.StringWithAggregatesFilter<"RPRanking"> | string
-  playerName?: Prisma.StringWithAggregatesFilter<"RPRanking"> | string
+  playerId?: Prisma.IntWithAggregatesFilter<"RPRanking"> | number
   rp?: Prisma.IntWithAggregatesFilter<"RPRanking"> | number
 }
 
 export type RPRankingCreateInput = {
   date: Date | string
   rank: number
-  playerId: string
-  playerName: string
   rp: number
+  player: Prisma.PlayerCreateNestedOneWithoutRpRankingsInput
 }
 
 export type RPRankingUncheckedCreateInput = {
   id?: number
   date: Date | string
   rank: number
-  playerId: string
-  playerName: string
+  playerId: number
   rp: number
 }
 
 export type RPRankingUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
-  playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  playerName?: Prisma.StringFieldUpdateOperationsInput | string
   rp?: Prisma.IntFieldUpdateOperationsInput | number
+  player?: Prisma.PlayerUpdateOneRequiredWithoutRpRankingsNestedInput
 }
 
 export type RPRankingUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
-  playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  playerName?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.IntFieldUpdateOperationsInput | number
   rp?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -320,16 +312,13 @@ export type RPRankingCreateManyInput = {
   id?: number
   date: Date | string
   rank: number
-  playerId: string
-  playerName: string
+  playerId: number
   rp: number
 }
 
 export type RPRankingUpdateManyMutationInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
-  playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  playerName?: Prisma.StringFieldUpdateOperationsInput | string
   rp?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -337,9 +326,18 @@ export type RPRankingUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
-  playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  playerName?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.IntFieldUpdateOperationsInput | number
   rp?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type RPRankingListRelationFilter = {
+  every?: Prisma.RPRankingWhereInput
+  some?: Prisma.RPRankingWhereInput
+  none?: Prisma.RPRankingWhereInput
+}
+
+export type RPRankingOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type RPRankingDateRankCompoundUniqueInput = {
@@ -347,18 +345,23 @@ export type RPRankingDateRankCompoundUniqueInput = {
   rank: number
 }
 
+export type RPRankingDatePlayerIdCompoundUniqueInput = {
+  date: Date | string
+  playerId: number
+}
+
 export type RPRankingCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
   rank?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  playerName?: Prisma.SortOrder
   rp?: Prisma.SortOrder
 }
 
 export type RPRankingAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   rank?: Prisma.SortOrder
+  playerId?: Prisma.SortOrder
   rp?: Prisma.SortOrder
 }
 
@@ -367,7 +370,6 @@ export type RPRankingMaxOrderByAggregateInput = {
   date?: Prisma.SortOrder
   rank?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  playerName?: Prisma.SortOrder
   rp?: Prisma.SortOrder
 }
 
@@ -376,30 +378,137 @@ export type RPRankingMinOrderByAggregateInput = {
   date?: Prisma.SortOrder
   rank?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  playerName?: Prisma.SortOrder
   rp?: Prisma.SortOrder
 }
 
 export type RPRankingSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   rank?: Prisma.SortOrder
+  playerId?: Prisma.SortOrder
   rp?: Prisma.SortOrder
+}
+
+export type RPRankingCreateNestedManyWithoutPlayerInput = {
+  create?: Prisma.XOR<Prisma.RPRankingCreateWithoutPlayerInput, Prisma.RPRankingUncheckedCreateWithoutPlayerInput> | Prisma.RPRankingCreateWithoutPlayerInput[] | Prisma.RPRankingUncheckedCreateWithoutPlayerInput[]
+  connectOrCreate?: Prisma.RPRankingCreateOrConnectWithoutPlayerInput | Prisma.RPRankingCreateOrConnectWithoutPlayerInput[]
+  createMany?: Prisma.RPRankingCreateManyPlayerInputEnvelope
+  connect?: Prisma.RPRankingWhereUniqueInput | Prisma.RPRankingWhereUniqueInput[]
+}
+
+export type RPRankingUncheckedCreateNestedManyWithoutPlayerInput = {
+  create?: Prisma.XOR<Prisma.RPRankingCreateWithoutPlayerInput, Prisma.RPRankingUncheckedCreateWithoutPlayerInput> | Prisma.RPRankingCreateWithoutPlayerInput[] | Prisma.RPRankingUncheckedCreateWithoutPlayerInput[]
+  connectOrCreate?: Prisma.RPRankingCreateOrConnectWithoutPlayerInput | Prisma.RPRankingCreateOrConnectWithoutPlayerInput[]
+  createMany?: Prisma.RPRankingCreateManyPlayerInputEnvelope
+  connect?: Prisma.RPRankingWhereUniqueInput | Prisma.RPRankingWhereUniqueInput[]
+}
+
+export type RPRankingUpdateManyWithoutPlayerNestedInput = {
+  create?: Prisma.XOR<Prisma.RPRankingCreateWithoutPlayerInput, Prisma.RPRankingUncheckedCreateWithoutPlayerInput> | Prisma.RPRankingCreateWithoutPlayerInput[] | Prisma.RPRankingUncheckedCreateWithoutPlayerInput[]
+  connectOrCreate?: Prisma.RPRankingCreateOrConnectWithoutPlayerInput | Prisma.RPRankingCreateOrConnectWithoutPlayerInput[]
+  upsert?: Prisma.RPRankingUpsertWithWhereUniqueWithoutPlayerInput | Prisma.RPRankingUpsertWithWhereUniqueWithoutPlayerInput[]
+  createMany?: Prisma.RPRankingCreateManyPlayerInputEnvelope
+  set?: Prisma.RPRankingWhereUniqueInput | Prisma.RPRankingWhereUniqueInput[]
+  disconnect?: Prisma.RPRankingWhereUniqueInput | Prisma.RPRankingWhereUniqueInput[]
+  delete?: Prisma.RPRankingWhereUniqueInput | Prisma.RPRankingWhereUniqueInput[]
+  connect?: Prisma.RPRankingWhereUniqueInput | Prisma.RPRankingWhereUniqueInput[]
+  update?: Prisma.RPRankingUpdateWithWhereUniqueWithoutPlayerInput | Prisma.RPRankingUpdateWithWhereUniqueWithoutPlayerInput[]
+  updateMany?: Prisma.RPRankingUpdateManyWithWhereWithoutPlayerInput | Prisma.RPRankingUpdateManyWithWhereWithoutPlayerInput[]
+  deleteMany?: Prisma.RPRankingScalarWhereInput | Prisma.RPRankingScalarWhereInput[]
+}
+
+export type RPRankingUncheckedUpdateManyWithoutPlayerNestedInput = {
+  create?: Prisma.XOR<Prisma.RPRankingCreateWithoutPlayerInput, Prisma.RPRankingUncheckedCreateWithoutPlayerInput> | Prisma.RPRankingCreateWithoutPlayerInput[] | Prisma.RPRankingUncheckedCreateWithoutPlayerInput[]
+  connectOrCreate?: Prisma.RPRankingCreateOrConnectWithoutPlayerInput | Prisma.RPRankingCreateOrConnectWithoutPlayerInput[]
+  upsert?: Prisma.RPRankingUpsertWithWhereUniqueWithoutPlayerInput | Prisma.RPRankingUpsertWithWhereUniqueWithoutPlayerInput[]
+  createMany?: Prisma.RPRankingCreateManyPlayerInputEnvelope
+  set?: Prisma.RPRankingWhereUniqueInput | Prisma.RPRankingWhereUniqueInput[]
+  disconnect?: Prisma.RPRankingWhereUniqueInput | Prisma.RPRankingWhereUniqueInput[]
+  delete?: Prisma.RPRankingWhereUniqueInput | Prisma.RPRankingWhereUniqueInput[]
+  connect?: Prisma.RPRankingWhereUniqueInput | Prisma.RPRankingWhereUniqueInput[]
+  update?: Prisma.RPRankingUpdateWithWhereUniqueWithoutPlayerInput | Prisma.RPRankingUpdateWithWhereUniqueWithoutPlayerInput[]
+  updateMany?: Prisma.RPRankingUpdateManyWithWhereWithoutPlayerInput | Prisma.RPRankingUpdateManyWithWhereWithoutPlayerInput[]
+  deleteMany?: Prisma.RPRankingScalarWhereInput | Prisma.RPRankingScalarWhereInput[]
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
+export type RPRankingCreateWithoutPlayerInput = {
+  date: Date | string
+  rank: number
+  rp: number
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
+export type RPRankingUncheckedCreateWithoutPlayerInput = {
+  id?: number
+  date: Date | string
+  rank: number
+  rp: number
+}
+
+export type RPRankingCreateOrConnectWithoutPlayerInput = {
+  where: Prisma.RPRankingWhereUniqueInput
+  create: Prisma.XOR<Prisma.RPRankingCreateWithoutPlayerInput, Prisma.RPRankingUncheckedCreateWithoutPlayerInput>
+}
+
+export type RPRankingCreateManyPlayerInputEnvelope = {
+  data: Prisma.RPRankingCreateManyPlayerInput | Prisma.RPRankingCreateManyPlayerInput[]
+  skipDuplicates?: boolean
+}
+
+export type RPRankingUpsertWithWhereUniqueWithoutPlayerInput = {
+  where: Prisma.RPRankingWhereUniqueInput
+  update: Prisma.XOR<Prisma.RPRankingUpdateWithoutPlayerInput, Prisma.RPRankingUncheckedUpdateWithoutPlayerInput>
+  create: Prisma.XOR<Prisma.RPRankingCreateWithoutPlayerInput, Prisma.RPRankingUncheckedCreateWithoutPlayerInput>
+}
+
+export type RPRankingUpdateWithWhereUniqueWithoutPlayerInput = {
+  where: Prisma.RPRankingWhereUniqueInput
+  data: Prisma.XOR<Prisma.RPRankingUpdateWithoutPlayerInput, Prisma.RPRankingUncheckedUpdateWithoutPlayerInput>
+}
+
+export type RPRankingUpdateManyWithWhereWithoutPlayerInput = {
+  where: Prisma.RPRankingScalarWhereInput
+  data: Prisma.XOR<Prisma.RPRankingUpdateManyMutationInput, Prisma.RPRankingUncheckedUpdateManyWithoutPlayerInput>
+}
+
+export type RPRankingScalarWhereInput = {
+  AND?: Prisma.RPRankingScalarWhereInput | Prisma.RPRankingScalarWhereInput[]
+  OR?: Prisma.RPRankingScalarWhereInput[]
+  NOT?: Prisma.RPRankingScalarWhereInput | Prisma.RPRankingScalarWhereInput[]
+  id?: Prisma.IntFilter<"RPRanking"> | number
+  date?: Prisma.DateTimeFilter<"RPRanking"> | Date | string
+  rank?: Prisma.IntFilter<"RPRanking"> | number
+  playerId?: Prisma.IntFilter<"RPRanking"> | number
+  rp?: Prisma.IntFilter<"RPRanking"> | number
+}
+
+export type RPRankingCreateManyPlayerInput = {
+  id?: number
+  date: Date | string
+  rank: number
+  rp: number
+}
+
+export type RPRankingUpdateWithoutPlayerInput = {
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rank?: Prisma.IntFieldUpdateOperationsInput | number
+  rp?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type RPRankingUncheckedUpdateWithoutPlayerInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rank?: Prisma.IntFieldUpdateOperationsInput | number
+  rp?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type RPRankingUncheckedUpdateManyWithoutPlayerInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rank?: Prisma.IntFieldUpdateOperationsInput | number
+  rp?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -409,8 +518,8 @@ export type RPRankingSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   date?: boolean
   rank?: boolean
   playerId?: boolean
-  playerName?: boolean
   rp?: boolean
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["rPRanking"]>
 
 export type RPRankingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -418,8 +527,8 @@ export type RPRankingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   date?: boolean
   rank?: boolean
   playerId?: boolean
-  playerName?: boolean
   rp?: boolean
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["rPRanking"]>
 
 export type RPRankingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -427,8 +536,8 @@ export type RPRankingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   date?: boolean
   rank?: boolean
   playerId?: boolean
-  playerName?: boolean
   rp?: boolean
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["rPRanking"]>
 
 export type RPRankingSelectScalar = {
@@ -436,21 +545,30 @@ export type RPRankingSelectScalar = {
   date?: boolean
   rank?: boolean
   playerId?: boolean
-  playerName?: boolean
   rp?: boolean
 }
 
-export type RPRankingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "rank" | "playerId" | "playerName" | "rp", ExtArgs["result"]["rPRanking"]>
+export type RPRankingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "rank" | "playerId" | "rp", ExtArgs["result"]["rPRanking"]>
+export type RPRankingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
+}
+export type RPRankingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
+}
+export type RPRankingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
+}
 
 export type $RPRankingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "RPRanking"
-  objects: {}
+  objects: {
+    player: Prisma.$PlayerPayload<ExtArgs>
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     date: Date
     rank: number
-    playerId: string
-    playerName: string
+    playerId: number
     rp: number
   }, ExtArgs["result"]["rPRanking"]>
   composites: {}
@@ -846,6 +964,7 @@ readonly fields: RPRankingFieldRefs;
  */
 export interface Prisma__RPRankingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  player<T extends Prisma.PlayerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlayerDefaultArgs<ExtArgs>>): Prisma.Prisma__PlayerClient<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -878,8 +997,7 @@ export interface RPRankingFieldRefs {
   readonly id: Prisma.FieldRef<"RPRanking", 'Int'>
   readonly date: Prisma.FieldRef<"RPRanking", 'DateTime'>
   readonly rank: Prisma.FieldRef<"RPRanking", 'Int'>
-  readonly playerId: Prisma.FieldRef<"RPRanking", 'String'>
-  readonly playerName: Prisma.FieldRef<"RPRanking", 'String'>
+  readonly playerId: Prisma.FieldRef<"RPRanking", 'Int'>
   readonly rp: Prisma.FieldRef<"RPRanking", 'Int'>
 }
     
@@ -897,6 +1015,10 @@ export type RPRankingFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the RPRanking
    */
   omit?: Prisma.RPRankingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RPRankingInclude<ExtArgs> | null
   /**
    * Filter, which RPRanking to fetch.
    */
@@ -916,6 +1038,10 @@ export type RPRankingFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensi
    */
   omit?: Prisma.RPRankingOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RPRankingInclude<ExtArgs> | null
+  /**
    * Filter, which RPRanking to fetch.
    */
   where: Prisma.RPRankingWhereUniqueInput
@@ -933,6 +1059,10 @@ export type RPRankingFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the RPRanking
    */
   omit?: Prisma.RPRankingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RPRankingInclude<ExtArgs> | null
   /**
    * Filter, which RPRanking to fetch.
    */
@@ -982,6 +1112,10 @@ export type RPRankingFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensio
    */
   omit?: Prisma.RPRankingOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RPRankingInclude<ExtArgs> | null
+  /**
    * Filter, which RPRanking to fetch.
    */
   where?: Prisma.RPRankingWhereInput
@@ -1029,6 +1163,10 @@ export type RPRankingFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the RPRanking
    */
   omit?: Prisma.RPRankingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RPRankingInclude<ExtArgs> | null
   /**
    * Filter, which RPRankings to fetch.
    */
@@ -1078,6 +1216,10 @@ export type RPRankingCreateArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   omit?: Prisma.RPRankingOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RPRankingInclude<ExtArgs> | null
+  /**
    * The data needed to create a RPRanking.
    */
   data: Prisma.XOR<Prisma.RPRankingCreateInput, Prisma.RPRankingUncheckedCreateInput>
@@ -1111,6 +1253,10 @@ export type RPRankingCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exten
    */
   data: Prisma.RPRankingCreateManyInput | Prisma.RPRankingCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RPRankingIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1125,6 +1271,10 @@ export type RPRankingUpdateArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the RPRanking
    */
   omit?: Prisma.RPRankingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RPRankingInclude<ExtArgs> | null
   /**
    * The data needed to update a RPRanking.
    */
@@ -1177,6 +1327,10 @@ export type RPRankingUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Exten
    * Limit how many RPRankings to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RPRankingIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1191,6 +1345,10 @@ export type RPRankingUpsertArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the RPRanking
    */
   omit?: Prisma.RPRankingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RPRankingInclude<ExtArgs> | null
   /**
    * The filter to search for the RPRanking to update in case it exists.
    */
@@ -1217,6 +1375,10 @@ export type RPRankingDeleteArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the RPRanking
    */
   omit?: Prisma.RPRankingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RPRankingInclude<ExtArgs> | null
   /**
    * Filter which RPRanking to delete.
    */
@@ -1249,4 +1411,8 @@ export type RPRankingDefaultArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the RPRanking
    */
   omit?: Prisma.RPRankingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RPRankingInclude<ExtArgs> | null
 }

@@ -7,40 +7,66 @@ datasource db {
   provider = "postgresql"
 }
 
+model Player {
+  id      Int    @id @default(autoincrement())
+  name    String @unique
+  country String
+
+  rpRankings   RPRanking[]
+  fameRankings FameRanking[]
+}
+
+model Guild {
+  id      Int    @id @default(autoincrement())
+  name    String @unique
+  country String
+
+  rankings GuildRanking[]
+}
+
 model RPRanking {
-  id         Int      @id @default(autoincrement())
-  date       DateTime
-  rank       Int
-  playerId   String
-  playerName String
-  rp         Int
+  id       Int      @id @default(autoincrement())
+  date     DateTime
+  rank     Int
+  playerId Int
+  rp       Int
+
+  player Player @relation(fields: [playerId], references: [id])
 
   @@unique([date, rank])
+  @@unique([date, playerId])
   @@index([date])
+  @@index([playerId, date])
 }
 
 model FameRanking {
-  id         Int      @id @default(autoincrement())
-  date       DateTime
-  rank       Int
-  playerId   String
-  playerName String
-  fame       Int
+  id       Int      @id @default(autoincrement())
+  date     DateTime
+  rank     Int
+  playerId Int
+  fame     Int
+
+  player Player @relation(fields: [playerId], references: [id])
 
   @@unique([date, rank])
+  @@unique([date, playerId])
   @@index([date])
+  @@index([playerId, date])
 }
 
 model GuildRanking {
-  id        Int      @id @default(autoincrement())
-  date      DateTime
-  rank      Int
-  guildId   String
-  guildName String
-  gp        Int
+  id      Int      @id @default(autoincrement())
+  date    DateTime
+  rank    Int
+  guildId Int
+  gp      Int
+
+  guild Guild @relation(fields: [guildId], references: [id])
 
   @@unique([date, rank])
+  @@unique([date, guildId])
   @@index([date])
+  @@index([guildId, date])
 }
 
 model Event {

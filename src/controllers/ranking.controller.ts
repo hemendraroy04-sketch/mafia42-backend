@@ -9,6 +9,7 @@ import {
   addGuildRanking,
   getLatestGuildRanking,
   getGuildRankingByDate,
+  RankingInputError,
 } from "../services/ranking.service.js";
 
 // Helper to validate incoming payload
@@ -51,6 +52,10 @@ export const createRPRanking = async (req: Request, res: Response) => {
     const result = await addRPRanking(new Date(date), rankings);
     return res.status(201).json({ message: "RP ranking added successfully", result });
   } catch (error) {
+    if (error instanceof RankingInputError) {
+      return res.status(400).json({ message: error.message });
+    }
+
     console.error(error);
     return res.status(500).json({ message: "Failed to add RP ranking" });
   }
@@ -90,6 +95,10 @@ export const createFameRanking = async (req: Request, res: Response) => {
     const result = await addFameRanking(new Date(date), rankings);
     return res.status(201).json({ message: "Fame ranking added successfully", result });
   } catch (error) {
+    if (error instanceof RankingInputError) {
+      return res.status(400).json({ message: error.message });
+    }
+
     console.error(error);
     return res.status(500).json({ message: "Failed to add Fame ranking" });
   }
@@ -129,6 +138,10 @@ export const createGuildRanking = async (req: Request, res: Response) => {
     const result = await addGuildRanking(new Date(date), rankings);
     return res.status(201).json({ message: "Guild ranking added successfully", result });
   } catch (error) {
+    if (error instanceof RankingInputError) {
+      return res.status(400).json({ message: error.message });
+    }
+
     console.error(error);
     return res.status(500).json({ message: "Failed to add Guild ranking" });
   }

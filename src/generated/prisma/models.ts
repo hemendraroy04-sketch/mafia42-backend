@@ -8,6 +8,8 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/Player.js'
+export type * from './models/Guild.js'
 export type * from './models/RPRanking.js'
 export type * from './models/FameRanking.js'
 export type * from './models/GuildRanking.js'

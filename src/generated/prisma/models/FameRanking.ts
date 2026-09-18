@@ -29,12 +29,14 @@ export type AggregateFameRanking = {
 export type FameRankingAvgAggregateOutputType = {
   id: number | null
   rank: number | null
+  playerId: number | null
   fame: number | null
 }
 
 export type FameRankingSumAggregateOutputType = {
   id: number | null
   rank: number | null
+  playerId: number | null
   fame: number | null
 }
 
@@ -42,8 +44,7 @@ export type FameRankingMinAggregateOutputType = {
   id: number | null
   date: Date | null
   rank: number | null
-  playerId: string | null
-  playerName: string | null
+  playerId: number | null
   fame: number | null
 }
 
@@ -51,8 +52,7 @@ export type FameRankingMaxAggregateOutputType = {
   id: number | null
   date: Date | null
   rank: number | null
-  playerId: string | null
-  playerName: string | null
+  playerId: number | null
   fame: number | null
 }
 
@@ -61,7 +61,6 @@ export type FameRankingCountAggregateOutputType = {
   date: number
   rank: number
   playerId: number
-  playerName: number
   fame: number
   _all: number
 }
@@ -70,12 +69,14 @@ export type FameRankingCountAggregateOutputType = {
 export type FameRankingAvgAggregateInputType = {
   id?: true
   rank?: true
+  playerId?: true
   fame?: true
 }
 
 export type FameRankingSumAggregateInputType = {
   id?: true
   rank?: true
+  playerId?: true
   fame?: true
 }
 
@@ -84,7 +85,6 @@ export type FameRankingMinAggregateInputType = {
   date?: true
   rank?: true
   playerId?: true
-  playerName?: true
   fame?: true
 }
 
@@ -93,7 +93,6 @@ export type FameRankingMaxAggregateInputType = {
   date?: true
   rank?: true
   playerId?: true
-  playerName?: true
   fame?: true
 }
 
@@ -102,7 +101,6 @@ export type FameRankingCountAggregateInputType = {
   date?: true
   rank?: true
   playerId?: true
-  playerName?: true
   fame?: true
   _all?: true
 }
@@ -197,8 +195,7 @@ export type FameRankingGroupByOutputType = {
   id: number
   date: Date
   rank: number
-  playerId: string
-  playerName: string
+  playerId: number
   fame: number
   _count: FameRankingCountAggregateOutputType | null
   _avg: FameRankingAvgAggregateOutputType | null
@@ -229,9 +226,9 @@ export type FameRankingWhereInput = {
   id?: Prisma.IntFilter<"FameRanking"> | number
   date?: Prisma.DateTimeFilter<"FameRanking"> | Date | string
   rank?: Prisma.IntFilter<"FameRanking"> | number
-  playerId?: Prisma.StringFilter<"FameRanking"> | string
-  playerName?: Prisma.StringFilter<"FameRanking"> | string
+  playerId?: Prisma.IntFilter<"FameRanking"> | number
   fame?: Prisma.IntFilter<"FameRanking"> | number
+  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
 }
 
 export type FameRankingOrderByWithRelationInput = {
@@ -239,29 +236,29 @@ export type FameRankingOrderByWithRelationInput = {
   date?: Prisma.SortOrder
   rank?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  playerName?: Prisma.SortOrder
   fame?: Prisma.SortOrder
+  player?: Prisma.PlayerOrderByWithRelationInput
 }
 
 export type FameRankingWhereUniqueInput = Prisma.AtLeast<{
   id?: number
   date_rank?: Prisma.FameRankingDateRankCompoundUniqueInput
+  date_playerId?: Prisma.FameRankingDatePlayerIdCompoundUniqueInput
   AND?: Prisma.FameRankingWhereInput | Prisma.FameRankingWhereInput[]
   OR?: Prisma.FameRankingWhereInput[]
   NOT?: Prisma.FameRankingWhereInput | Prisma.FameRankingWhereInput[]
   date?: Prisma.DateTimeFilter<"FameRanking"> | Date | string
   rank?: Prisma.IntFilter<"FameRanking"> | number
-  playerId?: Prisma.StringFilter<"FameRanking"> | string
-  playerName?: Prisma.StringFilter<"FameRanking"> | string
+  playerId?: Prisma.IntFilter<"FameRanking"> | number
   fame?: Prisma.IntFilter<"FameRanking"> | number
-}, "id" | "date_rank">
+  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
+}, "id" | "date_rank" | "date_playerId">
 
 export type FameRankingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
   rank?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  playerName?: Prisma.SortOrder
   fame?: Prisma.SortOrder
   _count?: Prisma.FameRankingCountOrderByAggregateInput
   _avg?: Prisma.FameRankingAvgOrderByAggregateInput
@@ -277,42 +274,37 @@ export type FameRankingScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"FameRanking"> | number
   date?: Prisma.DateTimeWithAggregatesFilter<"FameRanking"> | Date | string
   rank?: Prisma.IntWithAggregatesFilter<"FameRanking"> | number
-  playerId?: Prisma.StringWithAggregatesFilter<"FameRanking"> | string
-  playerName?: Prisma.StringWithAggregatesFilter<"FameRanking"> | string
+  playerId?: Prisma.IntWithAggregatesFilter<"FameRanking"> | number
   fame?: Prisma.IntWithAggregatesFilter<"FameRanking"> | number
 }
 
 export type FameRankingCreateInput = {
   date: Date | string
   rank: number
-  playerId: string
-  playerName: string
   fame: number
+  player: Prisma.PlayerCreateNestedOneWithoutFameRankingsInput
 }
 
 export type FameRankingUncheckedCreateInput = {
   id?: number
   date: Date | string
   rank: number
-  playerId: string
-  playerName: string
+  playerId: number
   fame: number
 }
 
 export type FameRankingUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
-  playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  playerName?: Prisma.StringFieldUpdateOperationsInput | string
   fame?: Prisma.IntFieldUpdateOperationsInput | number
+  player?: Prisma.PlayerUpdateOneRequiredWithoutFameRankingsNestedInput
 }
 
 export type FameRankingUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
-  playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  playerName?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.IntFieldUpdateOperationsInput | number
   fame?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -320,16 +312,13 @@ export type FameRankingCreateManyInput = {
   id?: number
   date: Date | string
   rank: number
-  playerId: string
-  playerName: string
+  playerId: number
   fame: number
 }
 
 export type FameRankingUpdateManyMutationInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
-  playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  playerName?: Prisma.StringFieldUpdateOperationsInput | string
   fame?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -337,9 +326,18 @@ export type FameRankingUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
-  playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  playerName?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.IntFieldUpdateOperationsInput | number
   fame?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type FameRankingListRelationFilter = {
+  every?: Prisma.FameRankingWhereInput
+  some?: Prisma.FameRankingWhereInput
+  none?: Prisma.FameRankingWhereInput
+}
+
+export type FameRankingOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type FameRankingDateRankCompoundUniqueInput = {
@@ -347,18 +345,23 @@ export type FameRankingDateRankCompoundUniqueInput = {
   rank: number
 }
 
+export type FameRankingDatePlayerIdCompoundUniqueInput = {
+  date: Date | string
+  playerId: number
+}
+
 export type FameRankingCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
   rank?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  playerName?: Prisma.SortOrder
   fame?: Prisma.SortOrder
 }
 
 export type FameRankingAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   rank?: Prisma.SortOrder
+  playerId?: Prisma.SortOrder
   fame?: Prisma.SortOrder
 }
 
@@ -367,7 +370,6 @@ export type FameRankingMaxOrderByAggregateInput = {
   date?: Prisma.SortOrder
   rank?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  playerName?: Prisma.SortOrder
   fame?: Prisma.SortOrder
 }
 
@@ -376,14 +378,133 @@ export type FameRankingMinOrderByAggregateInput = {
   date?: Prisma.SortOrder
   rank?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  playerName?: Prisma.SortOrder
   fame?: Prisma.SortOrder
 }
 
 export type FameRankingSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   rank?: Prisma.SortOrder
+  playerId?: Prisma.SortOrder
   fame?: Prisma.SortOrder
+}
+
+export type FameRankingCreateNestedManyWithoutPlayerInput = {
+  create?: Prisma.XOR<Prisma.FameRankingCreateWithoutPlayerInput, Prisma.FameRankingUncheckedCreateWithoutPlayerInput> | Prisma.FameRankingCreateWithoutPlayerInput[] | Prisma.FameRankingUncheckedCreateWithoutPlayerInput[]
+  connectOrCreate?: Prisma.FameRankingCreateOrConnectWithoutPlayerInput | Prisma.FameRankingCreateOrConnectWithoutPlayerInput[]
+  createMany?: Prisma.FameRankingCreateManyPlayerInputEnvelope
+  connect?: Prisma.FameRankingWhereUniqueInput | Prisma.FameRankingWhereUniqueInput[]
+}
+
+export type FameRankingUncheckedCreateNestedManyWithoutPlayerInput = {
+  create?: Prisma.XOR<Prisma.FameRankingCreateWithoutPlayerInput, Prisma.FameRankingUncheckedCreateWithoutPlayerInput> | Prisma.FameRankingCreateWithoutPlayerInput[] | Prisma.FameRankingUncheckedCreateWithoutPlayerInput[]
+  connectOrCreate?: Prisma.FameRankingCreateOrConnectWithoutPlayerInput | Prisma.FameRankingCreateOrConnectWithoutPlayerInput[]
+  createMany?: Prisma.FameRankingCreateManyPlayerInputEnvelope
+  connect?: Prisma.FameRankingWhereUniqueInput | Prisma.FameRankingWhereUniqueInput[]
+}
+
+export type FameRankingUpdateManyWithoutPlayerNestedInput = {
+  create?: Prisma.XOR<Prisma.FameRankingCreateWithoutPlayerInput, Prisma.FameRankingUncheckedCreateWithoutPlayerInput> | Prisma.FameRankingCreateWithoutPlayerInput[] | Prisma.FameRankingUncheckedCreateWithoutPlayerInput[]
+  connectOrCreate?: Prisma.FameRankingCreateOrConnectWithoutPlayerInput | Prisma.FameRankingCreateOrConnectWithoutPlayerInput[]
+  upsert?: Prisma.FameRankingUpsertWithWhereUniqueWithoutPlayerInput | Prisma.FameRankingUpsertWithWhereUniqueWithoutPlayerInput[]
+  createMany?: Prisma.FameRankingCreateManyPlayerInputEnvelope
+  set?: Prisma.FameRankingWhereUniqueInput | Prisma.FameRankingWhereUniqueInput[]
+  disconnect?: Prisma.FameRankingWhereUniqueInput | Prisma.FameRankingWhereUniqueInput[]
+  delete?: Prisma.FameRankingWhereUniqueInput | Prisma.FameRankingWhereUniqueInput[]
+  connect?: Prisma.FameRankingWhereUniqueInput | Prisma.FameRankingWhereUniqueInput[]
+  update?: Prisma.FameRankingUpdateWithWhereUniqueWithoutPlayerInput | Prisma.FameRankingUpdateWithWhereUniqueWithoutPlayerInput[]
+  updateMany?: Prisma.FameRankingUpdateManyWithWhereWithoutPlayerInput | Prisma.FameRankingUpdateManyWithWhereWithoutPlayerInput[]
+  deleteMany?: Prisma.FameRankingScalarWhereInput | Prisma.FameRankingScalarWhereInput[]
+}
+
+export type FameRankingUncheckedUpdateManyWithoutPlayerNestedInput = {
+  create?: Prisma.XOR<Prisma.FameRankingCreateWithoutPlayerInput, Prisma.FameRankingUncheckedCreateWithoutPlayerInput> | Prisma.FameRankingCreateWithoutPlayerInput[] | Prisma.FameRankingUncheckedCreateWithoutPlayerInput[]
+  connectOrCreate?: Prisma.FameRankingCreateOrConnectWithoutPlayerInput | Prisma.FameRankingCreateOrConnectWithoutPlayerInput[]
+  upsert?: Prisma.FameRankingUpsertWithWhereUniqueWithoutPlayerInput | Prisma.FameRankingUpsertWithWhereUniqueWithoutPlayerInput[]
+  createMany?: Prisma.FameRankingCreateManyPlayerInputEnvelope
+  set?: Prisma.FameRankingWhereUniqueInput | Prisma.FameRankingWhereUniqueInput[]
+  disconnect?: Prisma.FameRankingWhereUniqueInput | Prisma.FameRankingWhereUniqueInput[]
+  delete?: Prisma.FameRankingWhereUniqueInput | Prisma.FameRankingWhereUniqueInput[]
+  connect?: Prisma.FameRankingWhereUniqueInput | Prisma.FameRankingWhereUniqueInput[]
+  update?: Prisma.FameRankingUpdateWithWhereUniqueWithoutPlayerInput | Prisma.FameRankingUpdateWithWhereUniqueWithoutPlayerInput[]
+  updateMany?: Prisma.FameRankingUpdateManyWithWhereWithoutPlayerInput | Prisma.FameRankingUpdateManyWithWhereWithoutPlayerInput[]
+  deleteMany?: Prisma.FameRankingScalarWhereInput | Prisma.FameRankingScalarWhereInput[]
+}
+
+export type FameRankingCreateWithoutPlayerInput = {
+  date: Date | string
+  rank: number
+  fame: number
+}
+
+export type FameRankingUncheckedCreateWithoutPlayerInput = {
+  id?: number
+  date: Date | string
+  rank: number
+  fame: number
+}
+
+export type FameRankingCreateOrConnectWithoutPlayerInput = {
+  where: Prisma.FameRankingWhereUniqueInput
+  create: Prisma.XOR<Prisma.FameRankingCreateWithoutPlayerInput, Prisma.FameRankingUncheckedCreateWithoutPlayerInput>
+}
+
+export type FameRankingCreateManyPlayerInputEnvelope = {
+  data: Prisma.FameRankingCreateManyPlayerInput | Prisma.FameRankingCreateManyPlayerInput[]
+  skipDuplicates?: boolean
+}
+
+export type FameRankingUpsertWithWhereUniqueWithoutPlayerInput = {
+  where: Prisma.FameRankingWhereUniqueInput
+  update: Prisma.XOR<Prisma.FameRankingUpdateWithoutPlayerInput, Prisma.FameRankingUncheckedUpdateWithoutPlayerInput>
+  create: Prisma.XOR<Prisma.FameRankingCreateWithoutPlayerInput, Prisma.FameRankingUncheckedCreateWithoutPlayerInput>
+}
+
+export type FameRankingUpdateWithWhereUniqueWithoutPlayerInput = {
+  where: Prisma.FameRankingWhereUniqueInput
+  data: Prisma.XOR<Prisma.FameRankingUpdateWithoutPlayerInput, Prisma.FameRankingUncheckedUpdateWithoutPlayerInput>
+}
+
+export type FameRankingUpdateManyWithWhereWithoutPlayerInput = {
+  where: Prisma.FameRankingScalarWhereInput
+  data: Prisma.XOR<Prisma.FameRankingUpdateManyMutationInput, Prisma.FameRankingUncheckedUpdateManyWithoutPlayerInput>
+}
+
+export type FameRankingScalarWhereInput = {
+  AND?: Prisma.FameRankingScalarWhereInput | Prisma.FameRankingScalarWhereInput[]
+  OR?: Prisma.FameRankingScalarWhereInput[]
+  NOT?: Prisma.FameRankingScalarWhereInput | Prisma.FameRankingScalarWhereInput[]
+  id?: Prisma.IntFilter<"FameRanking"> | number
+  date?: Prisma.DateTimeFilter<"FameRanking"> | Date | string
+  rank?: Prisma.IntFilter<"FameRanking"> | number
+  playerId?: Prisma.IntFilter<"FameRanking"> | number
+  fame?: Prisma.IntFilter<"FameRanking"> | number
+}
+
+export type FameRankingCreateManyPlayerInput = {
+  id?: number
+  date: Date | string
+  rank: number
+  fame: number
+}
+
+export type FameRankingUpdateWithoutPlayerInput = {
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rank?: Prisma.IntFieldUpdateOperationsInput | number
+  fame?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type FameRankingUncheckedUpdateWithoutPlayerInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rank?: Prisma.IntFieldUpdateOperationsInput | number
+  fame?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type FameRankingUncheckedUpdateManyWithoutPlayerInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rank?: Prisma.IntFieldUpdateOperationsInput | number
+  fame?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -393,8 +514,8 @@ export type FameRankingSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   date?: boolean
   rank?: boolean
   playerId?: boolean
-  playerName?: boolean
   fame?: boolean
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fameRanking"]>
 
 export type FameRankingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -402,8 +523,8 @@ export type FameRankingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   date?: boolean
   rank?: boolean
   playerId?: boolean
-  playerName?: boolean
   fame?: boolean
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fameRanking"]>
 
 export type FameRankingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -411,8 +532,8 @@ export type FameRankingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   date?: boolean
   rank?: boolean
   playerId?: boolean
-  playerName?: boolean
   fame?: boolean
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fameRanking"]>
 
 export type FameRankingSelectScalar = {
@@ -420,21 +541,30 @@ export type FameRankingSelectScalar = {
   date?: boolean
   rank?: boolean
   playerId?: boolean
-  playerName?: boolean
   fame?: boolean
 }
 
-export type FameRankingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "rank" | "playerId" | "playerName" | "fame", ExtArgs["result"]["fameRanking"]>
+export type FameRankingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "rank" | "playerId" | "fame", ExtArgs["result"]["fameRanking"]>
+export type FameRankingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
+}
+export type FameRankingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
+}
+export type FameRankingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
+}
 
 export type $FameRankingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FameRanking"
-  objects: {}
+  objects: {
+    player: Prisma.$PlayerPayload<ExtArgs>
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     date: Date
     rank: number
-    playerId: string
-    playerName: string
+    playerId: number
     fame: number
   }, ExtArgs["result"]["fameRanking"]>
   composites: {}
@@ -830,6 +960,7 @@ readonly fields: FameRankingFieldRefs;
  */
 export interface Prisma__FameRankingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  player<T extends Prisma.PlayerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlayerDefaultArgs<ExtArgs>>): Prisma.Prisma__PlayerClient<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -862,8 +993,7 @@ export interface FameRankingFieldRefs {
   readonly id: Prisma.FieldRef<"FameRanking", 'Int'>
   readonly date: Prisma.FieldRef<"FameRanking", 'DateTime'>
   readonly rank: Prisma.FieldRef<"FameRanking", 'Int'>
-  readonly playerId: Prisma.FieldRef<"FameRanking", 'String'>
-  readonly playerName: Prisma.FieldRef<"FameRanking", 'String'>
+  readonly playerId: Prisma.FieldRef<"FameRanking", 'Int'>
   readonly fame: Prisma.FieldRef<"FameRanking", 'Int'>
 }
     
@@ -881,6 +1011,10 @@ export type FameRankingFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the FameRanking
    */
   omit?: Prisma.FameRankingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FameRankingInclude<ExtArgs> | null
   /**
    * Filter, which FameRanking to fetch.
    */
@@ -900,6 +1034,10 @@ export type FameRankingFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Exten
    */
   omit?: Prisma.FameRankingOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FameRankingInclude<ExtArgs> | null
+  /**
    * Filter, which FameRanking to fetch.
    */
   where: Prisma.FameRankingWhereUniqueInput
@@ -917,6 +1055,10 @@ export type FameRankingFindFirstArgs<ExtArgs extends runtime.Types.Extensions.In
    * Omit specific fields from the FameRanking
    */
   omit?: Prisma.FameRankingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FameRankingInclude<ExtArgs> | null
   /**
    * Filter, which FameRanking to fetch.
    */
@@ -966,6 +1108,10 @@ export type FameRankingFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extens
    */
   omit?: Prisma.FameRankingOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FameRankingInclude<ExtArgs> | null
+  /**
    * Filter, which FameRanking to fetch.
    */
   where?: Prisma.FameRankingWhereInput
@@ -1013,6 +1159,10 @@ export type FameRankingFindManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the FameRanking
    */
   omit?: Prisma.FameRankingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FameRankingInclude<ExtArgs> | null
   /**
    * Filter, which FameRankings to fetch.
    */
@@ -1062,6 +1212,10 @@ export type FameRankingCreateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.FameRankingOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FameRankingInclude<ExtArgs> | null
+  /**
    * The data needed to create a FameRanking.
    */
   data: Prisma.XOR<Prisma.FameRankingCreateInput, Prisma.FameRankingUncheckedCreateInput>
@@ -1095,6 +1249,10 @@ export type FameRankingCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    */
   data: Prisma.FameRankingCreateManyInput | Prisma.FameRankingCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FameRankingIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1109,6 +1267,10 @@ export type FameRankingUpdateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the FameRanking
    */
   omit?: Prisma.FameRankingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FameRankingInclude<ExtArgs> | null
   /**
    * The data needed to update a FameRanking.
    */
@@ -1161,6 +1323,10 @@ export type FameRankingUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * Limit how many FameRankings to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FameRankingIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1175,6 +1341,10 @@ export type FameRankingUpsertArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the FameRanking
    */
   omit?: Prisma.FameRankingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FameRankingInclude<ExtArgs> | null
   /**
    * The filter to search for the FameRanking to update in case it exists.
    */
@@ -1201,6 +1371,10 @@ export type FameRankingDeleteArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the FameRanking
    */
   omit?: Prisma.FameRankingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FameRankingInclude<ExtArgs> | null
   /**
    * Filter which FameRanking to delete.
    */
@@ -1233,4 +1407,8 @@ export type FameRankingDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the FameRanking
    */
   omit?: Prisma.FameRankingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FameRankingInclude<ExtArgs> | null
 }

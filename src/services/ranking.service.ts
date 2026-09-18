@@ -2,12 +2,42 @@ import prisma from "../lib/prisma.js";
 
 import { RPEntry, FameEntry, GuildEntry } from "../types/entry.js";
 
-// RP ranking 
+export class RankingInputError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "RankingInputError";
+  }
+}
+
+// RP ranking
 
 export const addRPRanking = async (date: Date, rankings: RPEntry[]) => {
+  const players = await prisma.player.findMany({
+    where: {
+      name: {
+        in: rankings.map(({ playerName }) => playerName),
+      },
+    },
+  });
+
+  const playerMap = new Map(
+    players.map((player) => [player.name, player]),
+  );
+
+  for (const ranking of rankings) {
+    if (!playerMap.has(ranking.playerName)) {
+      throw new RankingInputError(
+        `Player '${ranking.playerName}' is not registered`,
+      );
+    }
+  }
+
   return prisma.rPRanking.createMany({
-    data: rankings.map(({ rank, playerId, playerName, rp }) => ({
-      date, rank, playerId, playerName, rp
+    data: rankings.map(({ rank, playerName, rp }) => ({
+      date,
+      rank,
+      playerId: playerMap.get(playerName)!.id,
+      rp,
     })),
   });
 };
@@ -22,7 +52,10 @@ export const getLatestRPRanking = async () => {
 
   const rankings = await prisma.rPRanking.findMany({
     where: { date: latest.date },
-    orderBy: { rank: "asc" }
+    orderBy: { rank: "asc" },
+    include: {
+      player: true,
+    },
   });
 
   return { date: latest.date, rankings };
@@ -31,7 +64,10 @@ export const getLatestRPRanking = async () => {
 export const getRPRankingByDate = async (date: Date) => {
   const rankings = await prisma.rPRanking.findMany({
     where: { date },
-    orderBy: { rank: "asc" }
+    orderBy: { rank: "asc" },
+    include: {
+      player: true,
+    },
   });
 
   return { date, rankings };
@@ -40,9 +76,32 @@ export const getRPRankingByDate = async (date: Date) => {
 // Fame ranking
 
 export const addFameRanking = async (date: Date, rankings: FameEntry[]) => {
+  const players = await prisma.player.findMany({
+    where: {
+      name: {
+        in: rankings.map(({ playerName }) => playerName),
+      },
+    },
+  });
+
+  const playerMap = new Map(
+    players.map((player) => [player.name, player]),
+  );
+
+  for (const ranking of rankings) {
+    if (!playerMap.has(ranking.playerName)) {
+      throw new RankingInputError(
+        `Player '${ranking.playerName}' is not registered`,
+      );
+    }
+  }
+
   return prisma.fameRanking.createMany({
-    data: rankings.map(({ rank, playerId, playerName, fame }) => ({
-      date, rank, playerId, playerName, fame
+    data: rankings.map(({ rank, playerName, fame }) => ({
+      date,
+      rank,
+      playerId: playerMap.get(playerName)!.id,
+      fame,
     })),
   });
 };
@@ -57,7 +116,10 @@ export const getLatestFameRanking = async () => {
 
   const rankings = await prisma.fameRanking.findMany({
     where: { date: latest.date },
-    orderBy: { rank: "asc" }
+    orderBy: { rank: "asc" },
+    include: {
+      player: true,
+    },
   });
 
   return { date: latest.date, rankings };
@@ -66,7 +128,10 @@ export const getLatestFameRanking = async () => {
 export const getFameRankingByDate = async (date: Date) => {
   const rankings = await prisma.fameRanking.findMany({
     where: { date },
-    orderBy: { rank: "asc" }
+    orderBy: { rank: "asc" },
+    include: {
+      player: true,
+    },
   });
 
   return { date, rankings };
@@ -75,9 +140,32 @@ export const getFameRankingByDate = async (date: Date) => {
 // Guild ranking
 
 export const addGuildRanking = async (date: Date, rankings: GuildEntry[]) => {
+  const guilds = await prisma.guild.findMany({
+    where: {
+      name: {
+        in: rankings.map(({ guildName }) => guildName),
+      },
+    },
+  });
+
+  const guildMap = new Map(
+    guilds.map((guild) => [guild.name, guild]),
+  );
+
+  for (const ranking of rankings) {
+    if (!guildMap.has(ranking.guildName)) {
+      throw new RankingInputError(
+        `Guild '${ranking.guildName}' is not registered`,
+      );
+    }
+  }
+
   return prisma.guildRanking.createMany({
-    data: rankings.map(({ rank, guildId, guildName, gp }) => ({
-      date, rank, guildId, guildName, gp
+    data: rankings.map(({ rank, guildName, gp }) => ({
+      date,
+      rank,
+      guildId: guildMap.get(guildName)!.id,
+      gp,
     })),
   });
 };
@@ -92,7 +180,10 @@ export const getLatestGuildRanking = async () => {
 
   const rankings = await prisma.guildRanking.findMany({
     where: { date: latest.date },
-    orderBy: { rank: "asc" }
+    orderBy: { rank: "asc" },
+    include: {
+      guild: true,
+    },
   });
 
   return { date: latest.date, rankings };
@@ -101,7 +192,10 @@ export const getLatestGuildRanking = async () => {
 export const getGuildRankingByDate = async (date: Date) => {
   const rankings = await prisma.guildRanking.findMany({
     where: { date },
-    orderBy: { rank: "asc" }
+    orderBy: { rank: "asc" },
+    include: {
+      guild: true,
+    },
   });
 
   return { date, rankings };

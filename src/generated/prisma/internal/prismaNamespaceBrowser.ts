@@ -51,6 +51,8 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  Player: 'Player',
+  Guild: 'Guild',
   RPRanking: 'RPRanking',
   FameRanking: 'FameRanking',
   GuildRanking: 'GuildRanking',
@@ -75,12 +77,29 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const PlayerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  country: 'country'
+} as const
+
+export type PlayerScalarFieldEnum = (typeof PlayerScalarFieldEnum)[keyof typeof PlayerScalarFieldEnum]
+
+
+export const GuildScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  country: 'country'
+} as const
+
+export type GuildScalarFieldEnum = (typeof GuildScalarFieldEnum)[keyof typeof GuildScalarFieldEnum]
+
+
 export const RPRankingScalarFieldEnum = {
   id: 'id',
   date: 'date',
   rank: 'rank',
   playerId: 'playerId',
-  playerName: 'playerName',
   rp: 'rp'
 } as const
 
@@ -92,7 +111,6 @@ export const FameRankingScalarFieldEnum = {
   date: 'date',
   rank: 'rank',
   playerId: 'playerId',
-  playerName: 'playerName',
   fame: 'fame'
 } as const
 
@@ -104,7 +122,6 @@ export const GuildRankingScalarFieldEnum = {
   date: 'date',
   rank: 'rank',
   guildId: 'guildId',
-  guildName: 'guildName',
   gp: 'gp'
 } as const
 
