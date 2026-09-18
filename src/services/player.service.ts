@@ -10,3 +10,10 @@ export const createPlayer = async (data: CreatePlayerInput) => {
     },
   });
 };
+
+export const updatePlayerCountry = async (name: string, country: string) => {
+  return prisma.player.update({
+    where: { name },
+    data: { country },
+  });
+};
