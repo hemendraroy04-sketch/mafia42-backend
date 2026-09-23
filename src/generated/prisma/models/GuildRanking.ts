@@ -31,6 +31,7 @@ export type GuildRankingAvgAggregateOutputType = {
   rank: number | null
   guildId: number | null
   gp: number | null
+  change: number | null
 }
 
 export type GuildRankingSumAggregateOutputType = {
@@ -38,6 +39,7 @@ export type GuildRankingSumAggregateOutputType = {
   rank: number | null
   guildId: number | null
   gp: number | null
+  change: number | null
 }
 
 export type GuildRankingMinAggregateOutputType = {
@@ -46,6 +48,7 @@ export type GuildRankingMinAggregateOutputType = {
   rank: number | null
   guildId: number | null
   gp: number | null
+  change: number | null
 }
 
 export type GuildRankingMaxAggregateOutputType = {
@@ -54,6 +57,7 @@ export type GuildRankingMaxAggregateOutputType = {
   rank: number | null
   guildId: number | null
   gp: number | null
+  change: number | null
 }
 
 export type GuildRankingCountAggregateOutputType = {
@@ -62,6 +66,7 @@ export type GuildRankingCountAggregateOutputType = {
   rank: number
   guildId: number
   gp: number
+  change: number
   _all: number
 }
 
@@ -71,6 +76,7 @@ export type GuildRankingAvgAggregateInputType = {
   rank?: true
   guildId?: true
   gp?: true
+  change?: true
 }
 
 export type GuildRankingSumAggregateInputType = {
@@ -78,6 +84,7 @@ export type GuildRankingSumAggregateInputType = {
   rank?: true
   guildId?: true
   gp?: true
+  change?: true
 }
 
 export type GuildRankingMinAggregateInputType = {
@@ -86,6 +93,7 @@ export type GuildRankingMinAggregateInputType = {
   rank?: true
   guildId?: true
   gp?: true
+  change?: true
 }
 
 export type GuildRankingMaxAggregateInputType = {
@@ -94,6 +102,7 @@ export type GuildRankingMaxAggregateInputType = {
   rank?: true
   guildId?: true
   gp?: true
+  change?: true
 }
 
 export type GuildRankingCountAggregateInputType = {
@@ -102,6 +111,7 @@ export type GuildRankingCountAggregateInputType = {
   rank?: true
   guildId?: true
   gp?: true
+  change?: true
   _all?: true
 }
 
@@ -197,6 +207,7 @@ export type GuildRankingGroupByOutputType = {
   rank: number
   guildId: number
   gp: number
+  change: number | null
   _count: GuildRankingCountAggregateOutputType | null
   _avg: GuildRankingAvgAggregateOutputType | null
   _sum: GuildRankingSumAggregateOutputType | null
@@ -228,6 +239,7 @@ export type GuildRankingWhereInput = {
   rank?: Prisma.IntFilter<"GuildRanking"> | number
   guildId?: Prisma.IntFilter<"GuildRanking"> | number
   gp?: Prisma.IntFilter<"GuildRanking"> | number
+  change?: Prisma.IntNullableFilter<"GuildRanking"> | number | null
   guild?: Prisma.XOR<Prisma.GuildScalarRelationFilter, Prisma.GuildWhereInput>
 }
 
@@ -237,6 +249,7 @@ export type GuildRankingOrderByWithRelationInput = {
   rank?: Prisma.SortOrder
   guildId?: Prisma.SortOrder
   gp?: Prisma.SortOrder
+  change?: Prisma.SortOrderInput | Prisma.SortOrder
   guild?: Prisma.GuildOrderByWithRelationInput
 }
 
@@ -251,6 +264,7 @@ export type GuildRankingWhereUniqueInput = Prisma.AtLeast<{
   rank?: Prisma.IntFilter<"GuildRanking"> | number
   guildId?: Prisma.IntFilter<"GuildRanking"> | number
   gp?: Prisma.IntFilter<"GuildRanking"> | number
+  change?: Prisma.IntNullableFilter<"GuildRanking"> | number | null
   guild?: Prisma.XOR<Prisma.GuildScalarRelationFilter, Prisma.GuildWhereInput>
 }, "id" | "date_rank" | "date_guildId">
 
@@ -260,6 +274,7 @@ export type GuildRankingOrderByWithAggregationInput = {
   rank?: Prisma.SortOrder
   guildId?: Prisma.SortOrder
   gp?: Prisma.SortOrder
+  change?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.GuildRankingCountOrderByAggregateInput
   _avg?: Prisma.GuildRankingAvgOrderByAggregateInput
   _max?: Prisma.GuildRankingMaxOrderByAggregateInput
@@ -276,12 +291,14 @@ export type GuildRankingScalarWhereWithAggregatesInput = {
   rank?: Prisma.IntWithAggregatesFilter<"GuildRanking"> | number
   guildId?: Prisma.IntWithAggregatesFilter<"GuildRanking"> | number
   gp?: Prisma.IntWithAggregatesFilter<"GuildRanking"> | number
+  change?: Prisma.IntNullableWithAggregatesFilter<"GuildRanking"> | number | null
 }
 
 export type GuildRankingCreateInput = {
   date: Date | string
   rank: number
   gp: number
+  change?: number | null
   guild: Prisma.GuildCreateNestedOneWithoutRankingsInput
 }
 
@@ -291,12 +308,14 @@ export type GuildRankingUncheckedCreateInput = {
   rank: number
   guildId: number
   gp: number
+  change?: number | null
 }
 
 export type GuildRankingUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
   gp?: Prisma.IntFieldUpdateOperationsInput | number
+  change?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   guild?: Prisma.GuildUpdateOneRequiredWithoutRankingsNestedInput
 }
 
@@ -306,6 +325,7 @@ export type GuildRankingUncheckedUpdateInput = {
   rank?: Prisma.IntFieldUpdateOperationsInput | number
   guildId?: Prisma.IntFieldUpdateOperationsInput | number
   gp?: Prisma.IntFieldUpdateOperationsInput | number
+  change?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type GuildRankingCreateManyInput = {
@@ -314,12 +334,14 @@ export type GuildRankingCreateManyInput = {
   rank: number
   guildId: number
   gp: number
+  change?: number | null
 }
 
 export type GuildRankingUpdateManyMutationInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
   gp?: Prisma.IntFieldUpdateOperationsInput | number
+  change?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type GuildRankingUncheckedUpdateManyInput = {
@@ -328,6 +350,7 @@ export type GuildRankingUncheckedUpdateManyInput = {
   rank?: Prisma.IntFieldUpdateOperationsInput | number
   guildId?: Prisma.IntFieldUpdateOperationsInput | number
   gp?: Prisma.IntFieldUpdateOperationsInput | number
+  change?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type GuildRankingListRelationFilter = {
@@ -356,6 +379,7 @@ export type GuildRankingCountOrderByAggregateInput = {
   rank?: Prisma.SortOrder
   guildId?: Prisma.SortOrder
   gp?: Prisma.SortOrder
+  change?: Prisma.SortOrder
 }
 
 export type GuildRankingAvgOrderByAggregateInput = {
@@ -363,6 +387,7 @@ export type GuildRankingAvgOrderByAggregateInput = {
   rank?: Prisma.SortOrder
   guildId?: Prisma.SortOrder
   gp?: Prisma.SortOrder
+  change?: Prisma.SortOrder
 }
 
 export type GuildRankingMaxOrderByAggregateInput = {
@@ -371,6 +396,7 @@ export type GuildRankingMaxOrderByAggregateInput = {
   rank?: Prisma.SortOrder
   guildId?: Prisma.SortOrder
   gp?: Prisma.SortOrder
+  change?: Prisma.SortOrder
 }
 
 export type GuildRankingMinOrderByAggregateInput = {
@@ -379,6 +405,7 @@ export type GuildRankingMinOrderByAggregateInput = {
   rank?: Prisma.SortOrder
   guildId?: Prisma.SortOrder
   gp?: Prisma.SortOrder
+  change?: Prisma.SortOrder
 }
 
 export type GuildRankingSumOrderByAggregateInput = {
@@ -386,6 +413,7 @@ export type GuildRankingSumOrderByAggregateInput = {
   rank?: Prisma.SortOrder
   guildId?: Prisma.SortOrder
   gp?: Prisma.SortOrder
+  change?: Prisma.SortOrder
 }
 
 export type GuildRankingCreateNestedManyWithoutGuildInput = {
@@ -434,6 +462,7 @@ export type GuildRankingCreateWithoutGuildInput = {
   date: Date | string
   rank: number
   gp: number
+  change?: number | null
 }
 
 export type GuildRankingUncheckedCreateWithoutGuildInput = {
@@ -441,6 +470,7 @@ export type GuildRankingUncheckedCreateWithoutGuildInput = {
   date: Date | string
   rank: number
   gp: number
+  change?: number | null
 }
 
 export type GuildRankingCreateOrConnectWithoutGuildInput = {
@@ -478,6 +508,7 @@ export type GuildRankingScalarWhereInput = {
   rank?: Prisma.IntFilter<"GuildRanking"> | number
   guildId?: Prisma.IntFilter<"GuildRanking"> | number
   gp?: Prisma.IntFilter<"GuildRanking"> | number
+  change?: Prisma.IntNullableFilter<"GuildRanking"> | number | null
 }
 
 export type GuildRankingCreateManyGuildInput = {
@@ -485,12 +516,14 @@ export type GuildRankingCreateManyGuildInput = {
   date: Date | string
   rank: number
   gp: number
+  change?: number | null
 }
 
 export type GuildRankingUpdateWithoutGuildInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
   gp?: Prisma.IntFieldUpdateOperationsInput | number
+  change?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type GuildRankingUncheckedUpdateWithoutGuildInput = {
@@ -498,6 +531,7 @@ export type GuildRankingUncheckedUpdateWithoutGuildInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
   gp?: Prisma.IntFieldUpdateOperationsInput | number
+  change?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type GuildRankingUncheckedUpdateManyWithoutGuildInput = {
@@ -505,6 +539,7 @@ export type GuildRankingUncheckedUpdateManyWithoutGuildInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
   gp?: Prisma.IntFieldUpdateOperationsInput | number
+  change?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -515,6 +550,7 @@ export type GuildRankingSelect<ExtArgs extends runtime.Types.Extensions.Internal
   rank?: boolean
   guildId?: boolean
   gp?: boolean
+  change?: boolean
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["guildRanking"]>
 
@@ -524,6 +560,7 @@ export type GuildRankingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   rank?: boolean
   guildId?: boolean
   gp?: boolean
+  change?: boolean
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["guildRanking"]>
 
@@ -533,6 +570,7 @@ export type GuildRankingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   rank?: boolean
   guildId?: boolean
   gp?: boolean
+  change?: boolean
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["guildRanking"]>
 
@@ -542,9 +580,10 @@ export type GuildRankingSelectScalar = {
   rank?: boolean
   guildId?: boolean
   gp?: boolean
+  change?: boolean
 }
 
-export type GuildRankingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "rank" | "guildId" | "gp", ExtArgs["result"]["guildRanking"]>
+export type GuildRankingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "rank" | "guildId" | "gp" | "change", ExtArgs["result"]["guildRanking"]>
 export type GuildRankingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
 }
@@ -566,6 +605,7 @@ export type $GuildRankingPayload<ExtArgs extends runtime.Types.Extensions.Intern
     rank: number
     guildId: number
     gp: number
+    change: number | null
   }, ExtArgs["result"]["guildRanking"]>
   composites: {}
 }
@@ -995,6 +1035,7 @@ export interface GuildRankingFieldRefs {
   readonly rank: Prisma.FieldRef<"GuildRanking", 'Int'>
   readonly guildId: Prisma.FieldRef<"GuildRanking", 'Int'>
   readonly gp: Prisma.FieldRef<"GuildRanking", 'Int'>
+  readonly change: Prisma.FieldRef<"GuildRanking", 'Int'>
 }
     
 

@@ -31,6 +31,7 @@ export type FameRankingAvgAggregateOutputType = {
   rank: number | null
   playerId: number | null
   fame: number | null
+  change: number | null
 }
 
 export type FameRankingSumAggregateOutputType = {
@@ -38,6 +39,7 @@ export type FameRankingSumAggregateOutputType = {
   rank: number | null
   playerId: number | null
   fame: number | null
+  change: number | null
 }
 
 export type FameRankingMinAggregateOutputType = {
@@ -46,6 +48,7 @@ export type FameRankingMinAggregateOutputType = {
   rank: number | null
   playerId: number | null
   fame: number | null
+  change: number | null
 }
 
 export type FameRankingMaxAggregateOutputType = {
@@ -54,6 +57,7 @@ export type FameRankingMaxAggregateOutputType = {
   rank: number | null
   playerId: number | null
   fame: number | null
+  change: number | null
 }
 
 export type FameRankingCountAggregateOutputType = {
@@ -62,6 +66,7 @@ export type FameRankingCountAggregateOutputType = {
   rank: number
   playerId: number
   fame: number
+  change: number
   _all: number
 }
 
@@ -71,6 +76,7 @@ export type FameRankingAvgAggregateInputType = {
   rank?: true
   playerId?: true
   fame?: true
+  change?: true
 }
 
 export type FameRankingSumAggregateInputType = {
@@ -78,6 +84,7 @@ export type FameRankingSumAggregateInputType = {
   rank?: true
   playerId?: true
   fame?: true
+  change?: true
 }
 
 export type FameRankingMinAggregateInputType = {
@@ -86,6 +93,7 @@ export type FameRankingMinAggregateInputType = {
   rank?: true
   playerId?: true
   fame?: true
+  change?: true
 }
 
 export type FameRankingMaxAggregateInputType = {
@@ -94,6 +102,7 @@ export type FameRankingMaxAggregateInputType = {
   rank?: true
   playerId?: true
   fame?: true
+  change?: true
 }
 
 export type FameRankingCountAggregateInputType = {
@@ -102,6 +111,7 @@ export type FameRankingCountAggregateInputType = {
   rank?: true
   playerId?: true
   fame?: true
+  change?: true
   _all?: true
 }
 
@@ -197,6 +207,7 @@ export type FameRankingGroupByOutputType = {
   rank: number
   playerId: number
   fame: number
+  change: number | null
   _count: FameRankingCountAggregateOutputType | null
   _avg: FameRankingAvgAggregateOutputType | null
   _sum: FameRankingSumAggregateOutputType | null
@@ -228,6 +239,7 @@ export type FameRankingWhereInput = {
   rank?: Prisma.IntFilter<"FameRanking"> | number
   playerId?: Prisma.IntFilter<"FameRanking"> | number
   fame?: Prisma.IntFilter<"FameRanking"> | number
+  change?: Prisma.IntNullableFilter<"FameRanking"> | number | null
   player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
 }
 
@@ -237,6 +249,7 @@ export type FameRankingOrderByWithRelationInput = {
   rank?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
   fame?: Prisma.SortOrder
+  change?: Prisma.SortOrderInput | Prisma.SortOrder
   player?: Prisma.PlayerOrderByWithRelationInput
 }
 
@@ -251,6 +264,7 @@ export type FameRankingWhereUniqueInput = Prisma.AtLeast<{
   rank?: Prisma.IntFilter<"FameRanking"> | number
   playerId?: Prisma.IntFilter<"FameRanking"> | number
   fame?: Prisma.IntFilter<"FameRanking"> | number
+  change?: Prisma.IntNullableFilter<"FameRanking"> | number | null
   player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
 }, "id" | "date_rank" | "date_playerId">
 
@@ -260,6 +274,7 @@ export type FameRankingOrderByWithAggregationInput = {
   rank?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
   fame?: Prisma.SortOrder
+  change?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.FameRankingCountOrderByAggregateInput
   _avg?: Prisma.FameRankingAvgOrderByAggregateInput
   _max?: Prisma.FameRankingMaxOrderByAggregateInput
@@ -276,12 +291,14 @@ export type FameRankingScalarWhereWithAggregatesInput = {
   rank?: Prisma.IntWithAggregatesFilter<"FameRanking"> | number
   playerId?: Prisma.IntWithAggregatesFilter<"FameRanking"> | number
   fame?: Prisma.IntWithAggregatesFilter<"FameRanking"> | number
+  change?: Prisma.IntNullableWithAggregatesFilter<"FameRanking"> | number | null
 }
 
 export type FameRankingCreateInput = {
   date: Date | string
   rank: number
   fame: number
+  change?: number | null
   player: Prisma.PlayerCreateNestedOneWithoutFameRankingsInput
 }
 
@@ -291,12 +308,14 @@ export type FameRankingUncheckedCreateInput = {
   rank: number
   playerId: number
   fame: number
+  change?: number | null
 }
 
 export type FameRankingUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
   fame?: Prisma.IntFieldUpdateOperationsInput | number
+  change?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   player?: Prisma.PlayerUpdateOneRequiredWithoutFameRankingsNestedInput
 }
 
@@ -306,6 +325,7 @@ export type FameRankingUncheckedUpdateInput = {
   rank?: Prisma.IntFieldUpdateOperationsInput | number
   playerId?: Prisma.IntFieldUpdateOperationsInput | number
   fame?: Prisma.IntFieldUpdateOperationsInput | number
+  change?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type FameRankingCreateManyInput = {
@@ -314,12 +334,14 @@ export type FameRankingCreateManyInput = {
   rank: number
   playerId: number
   fame: number
+  change?: number | null
 }
 
 export type FameRankingUpdateManyMutationInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
   fame?: Prisma.IntFieldUpdateOperationsInput | number
+  change?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type FameRankingUncheckedUpdateManyInput = {
@@ -328,6 +350,7 @@ export type FameRankingUncheckedUpdateManyInput = {
   rank?: Prisma.IntFieldUpdateOperationsInput | number
   playerId?: Prisma.IntFieldUpdateOperationsInput | number
   fame?: Prisma.IntFieldUpdateOperationsInput | number
+  change?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type FameRankingListRelationFilter = {
@@ -356,6 +379,7 @@ export type FameRankingCountOrderByAggregateInput = {
   rank?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
   fame?: Prisma.SortOrder
+  change?: Prisma.SortOrder
 }
 
 export type FameRankingAvgOrderByAggregateInput = {
@@ -363,6 +387,7 @@ export type FameRankingAvgOrderByAggregateInput = {
   rank?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
   fame?: Prisma.SortOrder
+  change?: Prisma.SortOrder
 }
 
 export type FameRankingMaxOrderByAggregateInput = {
@@ -371,6 +396,7 @@ export type FameRankingMaxOrderByAggregateInput = {
   rank?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
   fame?: Prisma.SortOrder
+  change?: Prisma.SortOrder
 }
 
 export type FameRankingMinOrderByAggregateInput = {
@@ -379,6 +405,7 @@ export type FameRankingMinOrderByAggregateInput = {
   rank?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
   fame?: Prisma.SortOrder
+  change?: Prisma.SortOrder
 }
 
 export type FameRankingSumOrderByAggregateInput = {
@@ -386,6 +413,7 @@ export type FameRankingSumOrderByAggregateInput = {
   rank?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
   fame?: Prisma.SortOrder
+  change?: Prisma.SortOrder
 }
 
 export type FameRankingCreateNestedManyWithoutPlayerInput = {
@@ -434,6 +462,7 @@ export type FameRankingCreateWithoutPlayerInput = {
   date: Date | string
   rank: number
   fame: number
+  change?: number | null
 }
 
 export type FameRankingUncheckedCreateWithoutPlayerInput = {
@@ -441,6 +470,7 @@ export type FameRankingUncheckedCreateWithoutPlayerInput = {
   date: Date | string
   rank: number
   fame: number
+  change?: number | null
 }
 
 export type FameRankingCreateOrConnectWithoutPlayerInput = {
@@ -478,6 +508,7 @@ export type FameRankingScalarWhereInput = {
   rank?: Prisma.IntFilter<"FameRanking"> | number
   playerId?: Prisma.IntFilter<"FameRanking"> | number
   fame?: Prisma.IntFilter<"FameRanking"> | number
+  change?: Prisma.IntNullableFilter<"FameRanking"> | number | null
 }
 
 export type FameRankingCreateManyPlayerInput = {
@@ -485,12 +516,14 @@ export type FameRankingCreateManyPlayerInput = {
   date: Date | string
   rank: number
   fame: number
+  change?: number | null
 }
 
 export type FameRankingUpdateWithoutPlayerInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
   fame?: Prisma.IntFieldUpdateOperationsInput | number
+  change?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type FameRankingUncheckedUpdateWithoutPlayerInput = {
@@ -498,6 +531,7 @@ export type FameRankingUncheckedUpdateWithoutPlayerInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
   fame?: Prisma.IntFieldUpdateOperationsInput | number
+  change?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type FameRankingUncheckedUpdateManyWithoutPlayerInput = {
@@ -505,6 +539,7 @@ export type FameRankingUncheckedUpdateManyWithoutPlayerInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rank?: Prisma.IntFieldUpdateOperationsInput | number
   fame?: Prisma.IntFieldUpdateOperationsInput | number
+  change?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -515,6 +550,7 @@ export type FameRankingSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   rank?: boolean
   playerId?: boolean
   fame?: boolean
+  change?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fameRanking"]>
 
@@ -524,6 +560,7 @@ export type FameRankingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   rank?: boolean
   playerId?: boolean
   fame?: boolean
+  change?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fameRanking"]>
 
@@ -533,6 +570,7 @@ export type FameRankingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   rank?: boolean
   playerId?: boolean
   fame?: boolean
+  change?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fameRanking"]>
 
@@ -542,9 +580,10 @@ export type FameRankingSelectScalar = {
   rank?: boolean
   playerId?: boolean
   fame?: boolean
+  change?: boolean
 }
 
-export type FameRankingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "rank" | "playerId" | "fame", ExtArgs["result"]["fameRanking"]>
+export type FameRankingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "rank" | "playerId" | "fame" | "change", ExtArgs["result"]["fameRanking"]>
 export type FameRankingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }
@@ -566,6 +605,7 @@ export type $FameRankingPayload<ExtArgs extends runtime.Types.Extensions.Interna
     rank: number
     playerId: number
     fame: number
+    change: number | null
   }, ExtArgs["result"]["fameRanking"]>
   composites: {}
 }
@@ -995,6 +1035,7 @@ export interface FameRankingFieldRefs {
   readonly rank: Prisma.FieldRef<"FameRanking", 'Int'>
   readonly playerId: Prisma.FieldRef<"FameRanking", 'Int'>
   readonly fame: Prisma.FieldRef<"FameRanking", 'Int'>
+  readonly change: Prisma.FieldRef<"FameRanking", 'Int'>
 }
     
 

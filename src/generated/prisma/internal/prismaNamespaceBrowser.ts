@@ -100,7 +100,8 @@ export const RPRankingScalarFieldEnum = {
   date: 'date',
   rank: 'rank',
   playerId: 'playerId',
-  rp: 'rp'
+  rp: 'rp',
+  change: 'change'
 } as const
 
 export type RPRankingScalarFieldEnum = (typeof RPRankingScalarFieldEnum)[keyof typeof RPRankingScalarFieldEnum]
@@ -111,7 +112,8 @@ export const FameRankingScalarFieldEnum = {
   date: 'date',
   rank: 'rank',
   playerId: 'playerId',
-  fame: 'fame'
+  fame: 'fame',
+  change: 'change'
 } as const
 
 export type FameRankingScalarFieldEnum = (typeof FameRankingScalarFieldEnum)[keyof typeof FameRankingScalarFieldEnum]
@@ -122,7 +124,8 @@ export const GuildRankingScalarFieldEnum = {
   date: 'date',
   rank: 'rank',
   guildId: 'guildId',
-  gp: 'gp'
+  gp: 'gp',
+  change: 'change'
 } as const
 
 export type GuildRankingScalarFieldEnum = (typeof GuildRankingScalarFieldEnum)[keyof typeof GuildRankingScalarFieldEnum]

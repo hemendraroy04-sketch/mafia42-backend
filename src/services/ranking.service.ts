@@ -32,13 +32,51 @@ export const addRPRanking = async (date: Date, rankings: RPEntry[]) => {
     }
   }
 
+  const previous = await prisma.rPRanking.findFirst({
+    where: {
+      date: {
+        lt: date,
+      },
+    },
+    orderBy: {
+      date: "desc",
+    },
+    select: {
+      date: true,
+    },
+  });
+
+  let previousMap = new Map<number, number>();
+
+  if (previous) {
+    const previousRankings = await prisma.rPRanking.findMany({
+      where: {
+        date: previous.date,
+      },
+      select: {
+        playerId: true,
+        rp: true,
+      },
+    });
+
+    previousMap = new Map(
+      previousRankings.map((ranking) => [ranking.playerId, ranking.rp]),
+    );
+  }
+
   return prisma.rPRanking.createMany({
-    data: rankings.map(({ rank, playerName, rp }) => ({
-      date,
-      rank,
-      playerId: playerMap.get(playerName)!.id,
-      rp,
-    })),
+    data: rankings.map(({ rank, playerName, rp }) => {
+      const playerId = playerMap.get(playerName)!.id;
+      const previousRP = previousMap.get(playerId);
+
+      return {
+        date,
+        rank,
+        playerId,
+        rp,
+        change: previousRP === undefined ? null : rp - previousRP,
+      };
+    }),
   });
 };
 
@@ -96,13 +134,51 @@ export const addFameRanking = async (date: Date, rankings: FameEntry[]) => {
     }
   }
 
+  const previous = await prisma.fameRanking.findFirst({
+    where: {
+      date: {
+        lt: date,
+      },
+    },
+    orderBy: {
+      date: "desc",
+    },
+    select: {
+      date: true,
+    },
+  });
+
+  let previousMap = new Map<number, number>();
+
+  if (previous) {
+    const previousRankings = await prisma.fameRanking.findMany({
+      where: {
+        date: previous.date,
+      },
+      select: {
+        playerId: true,
+        fame: true,
+      },
+    });
+
+    previousMap = new Map(
+      previousRankings.map((ranking) => [ranking.playerId, ranking.fame]),
+    );
+  }
+
   return prisma.fameRanking.createMany({
-    data: rankings.map(({ rank, playerName, fame }) => ({
-      date,
-      rank,
-      playerId: playerMap.get(playerName)!.id,
-      fame,
-    })),
+    data: rankings.map(({ rank, playerName, fame }) => {
+      const playerId = playerMap.get(playerName)!.id;
+      const previousFame = previousMap.get(playerId);
+
+      return {
+        date,
+        rank,
+        playerId,
+        fame,
+        change: previousFame === undefined ? null : fame - previousFame,
+      };
+    }),
   });
 };
 
@@ -160,13 +236,51 @@ export const addGuildRanking = async (date: Date, rankings: GuildEntry[]) => {
     }
   }
 
+  const previous = await prisma.guildRanking.findFirst({
+    where: {
+      date: {
+        lt: date,
+      },
+    },
+    orderBy: {
+      date: "desc",
+    },
+    select: {
+      date: true,
+    },
+  });
+
+  let previousMap = new Map<number, number>();
+
+  if (previous) {
+    const previousRankings = await prisma.guildRanking.findMany({
+      where: {
+        date: previous.date,
+      },
+      select: {
+        guildId: true,
+        gp: true,
+      },
+    });
+
+    previousMap = new Map(
+      previousRankings.map((ranking) => [ranking.guildId, ranking.gp]),
+    );
+  }
+
   return prisma.guildRanking.createMany({
-    data: rankings.map(({ rank, guildName, gp }) => ({
-      date,
-      rank,
-      guildId: guildMap.get(guildName)!.id,
-      gp,
-    })),
+    data: rankings.map(({ rank, guildName, gp }) => {
+      const guildId = guildMap.get(guildName)!.id;
+      const previousGP = previousMap.get(guildId);
+
+      return {
+        date,
+        rank,
+        guildId,
+        gp,
+        change: previousGP === undefined ? null : gp - previousGP,
+      };
+    }),
   });
 };
 
