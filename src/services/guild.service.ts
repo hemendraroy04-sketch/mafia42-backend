@@ -17,3 +17,17 @@ export const updateGuildCountry = async (name: string, country: string) => {
     data: { country },
   });
 };
+
+export const getGuildByName = async (name: string) => {
+  return prisma.guild.findUnique({
+    where: { name },
+    select: {
+      id: true,
+      name: true,
+      country: true,
+      GuildLbCount: true,
+      PeakGP: true,
+      PeakGPRank: true,
+    },
+  });
+};

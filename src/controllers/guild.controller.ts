@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createGuild, updateGuildCountry } from "../services/guild.service.js";
+import { createGuild, updateGuildCountry, getGuildByName } from "../services/guild.service.js";
 
 export const createNewGuild = async (req: Request, res: Response) => {
   try {
@@ -56,6 +56,34 @@ export const editGuildCountry = async (req: Request, res: Response) => {
 
     return res.status(500).json({
       message: "Failed to update guild country",
+    });
+  }
+};
+
+export const getGuild = async (req: Request, res: Response) => {
+  try {
+    const name = Array.isArray(req.params.name) ? req.params.name[0] : req.params.name;
+
+    if (!name) {
+      return res.status(400).json({
+        message: "Guild name is required",
+      });
+    }
+
+    const guild = await getGuildByName(name);
+
+    if (!guild) {
+      return res.status(404).json({
+        message: "Guild not found",
+      });
+    }
+
+    return res.status(200).json(guild);
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Failed to fetch guild",
     });
   }
 };
