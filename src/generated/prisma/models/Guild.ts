@@ -28,56 +28,86 @@ export type AggregateGuild = {
 
 export type GuildAvgAggregateOutputType = {
   id: number | null
+  GuildLbCount: number | null
+  PeakGP: number | null
+  PeakGPRank: number | null
 }
 
 export type GuildSumAggregateOutputType = {
   id: number | null
+  GuildLbCount: number | null
+  PeakGP: number | null
+  PeakGPRank: number | null
 }
 
 export type GuildMinAggregateOutputType = {
   id: number | null
   name: string | null
   country: string | null
+  GuildLbCount: number | null
+  PeakGP: number | null
+  PeakGPRank: number | null
 }
 
 export type GuildMaxAggregateOutputType = {
   id: number | null
   name: string | null
   country: string | null
+  GuildLbCount: number | null
+  PeakGP: number | null
+  PeakGPRank: number | null
 }
 
 export type GuildCountAggregateOutputType = {
   id: number
   name: number
   country: number
+  GuildLbCount: number
+  PeakGP: number
+  PeakGPRank: number
   _all: number
 }
 
 
 export type GuildAvgAggregateInputType = {
   id?: true
+  GuildLbCount?: true
+  PeakGP?: true
+  PeakGPRank?: true
 }
 
 export type GuildSumAggregateInputType = {
   id?: true
+  GuildLbCount?: true
+  PeakGP?: true
+  PeakGPRank?: true
 }
 
 export type GuildMinAggregateInputType = {
   id?: true
   name?: true
   country?: true
+  GuildLbCount?: true
+  PeakGP?: true
+  PeakGPRank?: true
 }
 
 export type GuildMaxAggregateInputType = {
   id?: true
   name?: true
   country?: true
+  GuildLbCount?: true
+  PeakGP?: true
+  PeakGPRank?: true
 }
 
 export type GuildCountAggregateInputType = {
   id?: true
   name?: true
   country?: true
+  GuildLbCount?: true
+  PeakGP?: true
+  PeakGPRank?: true
   _all?: true
 }
 
@@ -171,6 +201,9 @@ export type GuildGroupByOutputType = {
   id: number
   name: string
   country: string
+  GuildLbCount: number
+  PeakGP: number | null
+  PeakGPRank: number | null
   _count: GuildCountAggregateOutputType | null
   _avg: GuildAvgAggregateOutputType | null
   _sum: GuildSumAggregateOutputType | null
@@ -200,6 +233,9 @@ export type GuildWhereInput = {
   id?: Prisma.IntFilter<"Guild"> | number
   name?: Prisma.StringFilter<"Guild"> | string
   country?: Prisma.StringFilter<"Guild"> | string
+  GuildLbCount?: Prisma.IntFilter<"Guild"> | number
+  PeakGP?: Prisma.IntNullableFilter<"Guild"> | number | null
+  PeakGPRank?: Prisma.IntNullableFilter<"Guild"> | number | null
   rankings?: Prisma.GuildRankingListRelationFilter
 }
 
@@ -207,6 +243,9 @@ export type GuildOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   country?: Prisma.SortOrder
+  GuildLbCount?: Prisma.SortOrder
+  PeakGP?: Prisma.SortOrderInput | Prisma.SortOrder
+  PeakGPRank?: Prisma.SortOrderInput | Prisma.SortOrder
   rankings?: Prisma.GuildRankingOrderByRelationAggregateInput
 }
 
@@ -217,6 +256,9 @@ export type GuildWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.GuildWhereInput[]
   NOT?: Prisma.GuildWhereInput | Prisma.GuildWhereInput[]
   country?: Prisma.StringFilter<"Guild"> | string
+  GuildLbCount?: Prisma.IntFilter<"Guild"> | number
+  PeakGP?: Prisma.IntNullableFilter<"Guild"> | number | null
+  PeakGPRank?: Prisma.IntNullableFilter<"Guild"> | number | null
   rankings?: Prisma.GuildRankingListRelationFilter
 }, "id" | "name">
 
@@ -224,6 +266,9 @@ export type GuildOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   country?: Prisma.SortOrder
+  GuildLbCount?: Prisma.SortOrder
+  PeakGP?: Prisma.SortOrderInput | Prisma.SortOrder
+  PeakGPRank?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.GuildCountOrderByAggregateInput
   _avg?: Prisma.GuildAvgOrderByAggregateInput
   _max?: Prisma.GuildMaxOrderByAggregateInput
@@ -238,11 +283,17 @@ export type GuildScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Guild"> | number
   name?: Prisma.StringWithAggregatesFilter<"Guild"> | string
   country?: Prisma.StringWithAggregatesFilter<"Guild"> | string
+  GuildLbCount?: Prisma.IntWithAggregatesFilter<"Guild"> | number
+  PeakGP?: Prisma.IntNullableWithAggregatesFilter<"Guild"> | number | null
+  PeakGPRank?: Prisma.IntNullableWithAggregatesFilter<"Guild"> | number | null
 }
 
 export type GuildCreateInput = {
   name: string
   country: string
+  GuildLbCount?: number
+  PeakGP?: number | null
+  PeakGPRank?: number | null
   rankings?: Prisma.GuildRankingCreateNestedManyWithoutGuildInput
 }
 
@@ -250,12 +301,18 @@ export type GuildUncheckedCreateInput = {
   id?: number
   name: string
   country: string
+  GuildLbCount?: number
+  PeakGP?: number | null
+  PeakGPRank?: number | null
   rankings?: Prisma.GuildRankingUncheckedCreateNestedManyWithoutGuildInput
 }
 
 export type GuildUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
+  GuildLbCount?: Prisma.IntFieldUpdateOperationsInput | number
+  PeakGP?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  PeakGPRank?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rankings?: Prisma.GuildRankingUpdateManyWithoutGuildNestedInput
 }
 
@@ -263,6 +320,9 @@ export type GuildUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
+  GuildLbCount?: Prisma.IntFieldUpdateOperationsInput | number
+  PeakGP?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  PeakGPRank?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rankings?: Prisma.GuildRankingUncheckedUpdateManyWithoutGuildNestedInput
 }
 
@@ -270,43 +330,67 @@ export type GuildCreateManyInput = {
   id?: number
   name: string
   country: string
+  GuildLbCount?: number
+  PeakGP?: number | null
+  PeakGPRank?: number | null
 }
 
 export type GuildUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
+  GuildLbCount?: Prisma.IntFieldUpdateOperationsInput | number
+  PeakGP?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  PeakGPRank?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type GuildUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
+  GuildLbCount?: Prisma.IntFieldUpdateOperationsInput | number
+  PeakGP?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  PeakGPRank?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type GuildCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   country?: Prisma.SortOrder
+  GuildLbCount?: Prisma.SortOrder
+  PeakGP?: Prisma.SortOrder
+  PeakGPRank?: Prisma.SortOrder
 }
 
 export type GuildAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  GuildLbCount?: Prisma.SortOrder
+  PeakGP?: Prisma.SortOrder
+  PeakGPRank?: Prisma.SortOrder
 }
 
 export type GuildMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   country?: Prisma.SortOrder
+  GuildLbCount?: Prisma.SortOrder
+  PeakGP?: Prisma.SortOrder
+  PeakGPRank?: Prisma.SortOrder
 }
 
 export type GuildMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   country?: Prisma.SortOrder
+  GuildLbCount?: Prisma.SortOrder
+  PeakGP?: Prisma.SortOrder
+  PeakGPRank?: Prisma.SortOrder
 }
 
 export type GuildSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  GuildLbCount?: Prisma.SortOrder
+  PeakGP?: Prisma.SortOrder
+  PeakGPRank?: Prisma.SortOrder
 }
 
 export type GuildScalarRelationFilter = {
@@ -331,12 +415,18 @@ export type GuildUpdateOneRequiredWithoutRankingsNestedInput = {
 export type GuildCreateWithoutRankingsInput = {
   name: string
   country: string
+  GuildLbCount?: number
+  PeakGP?: number | null
+  PeakGPRank?: number | null
 }
 
 export type GuildUncheckedCreateWithoutRankingsInput = {
   id?: number
   name: string
   country: string
+  GuildLbCount?: number
+  PeakGP?: number | null
+  PeakGPRank?: number | null
 }
 
 export type GuildCreateOrConnectWithoutRankingsInput = {
@@ -358,12 +448,18 @@ export type GuildUpdateToOneWithWhereWithoutRankingsInput = {
 export type GuildUpdateWithoutRankingsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
+  GuildLbCount?: Prisma.IntFieldUpdateOperationsInput | number
+  PeakGP?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  PeakGPRank?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type GuildUncheckedUpdateWithoutRankingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
+  GuildLbCount?: Prisma.IntFieldUpdateOperationsInput | number
+  PeakGP?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  PeakGPRank?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -401,6 +497,9 @@ export type GuildSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   id?: boolean
   name?: boolean
   country?: boolean
+  GuildLbCount?: boolean
+  PeakGP?: boolean
+  PeakGPRank?: boolean
   rankings?: boolean | Prisma.Guild$rankingsArgs<ExtArgs>
   _count?: boolean | Prisma.GuildCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["guild"]>
@@ -409,21 +508,30 @@ export type GuildSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   name?: boolean
   country?: boolean
+  GuildLbCount?: boolean
+  PeakGP?: boolean
+  PeakGPRank?: boolean
 }, ExtArgs["result"]["guild"]>
 
 export type GuildSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   country?: boolean
+  GuildLbCount?: boolean
+  PeakGP?: boolean
+  PeakGPRank?: boolean
 }, ExtArgs["result"]["guild"]>
 
 export type GuildSelectScalar = {
   id?: boolean
   name?: boolean
   country?: boolean
+  GuildLbCount?: boolean
+  PeakGP?: boolean
+  PeakGPRank?: boolean
 }
 
-export type GuildOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "country", ExtArgs["result"]["guild"]>
+export type GuildOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "country" | "GuildLbCount" | "PeakGP" | "PeakGPRank", ExtArgs["result"]["guild"]>
 export type GuildInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   rankings?: boolean | Prisma.Guild$rankingsArgs<ExtArgs>
   _count?: boolean | Prisma.GuildCountOutputTypeDefaultArgs<ExtArgs>
@@ -440,6 +548,9 @@ export type $GuildPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     id: number
     name: string
     country: string
+    GuildLbCount: number
+    PeakGP: number | null
+    PeakGPRank: number | null
   }, ExtArgs["result"]["guild"]>
   composites: {}
 }
@@ -867,6 +978,9 @@ export interface GuildFieldRefs {
   readonly id: Prisma.FieldRef<"Guild", 'Int'>
   readonly name: Prisma.FieldRef<"Guild", 'String'>
   readonly country: Prisma.FieldRef<"Guild", 'String'>
+  readonly GuildLbCount: Prisma.FieldRef<"Guild", 'Int'>
+  readonly PeakGP: Prisma.FieldRef<"Guild", 'Int'>
+  readonly PeakGPRank: Prisma.FieldRef<"Guild", 'Int'>
 }
     
 

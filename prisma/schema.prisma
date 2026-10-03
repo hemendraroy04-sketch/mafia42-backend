@@ -12,6 +12,13 @@ model Player {
   name    String @unique
   country String
 
+  RPLbcount    Int  @default(0)
+  FameLBcount  Int  @default(0)
+  PeakRP       Int?
+  PeakFame     Int?
+  PeakRPRank   Int?
+  PeakFameRank Int?
+
   rpRankings   RPRanking[]
   fameRankings FameRanking[]
 }
@@ -20,6 +27,10 @@ model Guild {
   id      Int    @id @default(autoincrement())
   name    String @unique
   country String
+
+  GuildLbCount Int  @default(0)
+  PeakGP       Int?
+  PeakGPRank   Int?
 
   rankings GuildRanking[]
 }

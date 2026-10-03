@@ -1058,7 +1058,13 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const PlayerScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  country: 'country'
+  country: 'country',
+  RPLbcount: 'RPLbcount',
+  FameLBcount: 'FameLBcount',
+  PeakRP: 'PeakRP',
+  PeakFame: 'PeakFame',
+  PeakRPRank: 'PeakRPRank',
+  PeakFameRank: 'PeakFameRank'
 } as const
 
 export type PlayerScalarFieldEnum = (typeof PlayerScalarFieldEnum)[keyof typeof PlayerScalarFieldEnum]
@@ -1067,7 +1073,10 @@ export type PlayerScalarFieldEnum = (typeof PlayerScalarFieldEnum)[keyof typeof 
 export const GuildScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  country: 'country'
+  country: 'country',
+  GuildLbCount: 'GuildLbCount',
+  PeakGP: 'PeakGP',
+  PeakGPRank: 'PeakGPRank'
 } as const
 
 export type GuildScalarFieldEnum = (typeof GuildScalarFieldEnum)[keyof typeof GuildScalarFieldEnum]
