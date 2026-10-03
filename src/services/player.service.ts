@@ -17,3 +17,20 @@ export const updatePlayerCountry = async (name: string, country: string) => {
     data: { country },
   });
 };
+
+export const getPlayerByName = async (name: string) => {
+  return prisma.player.findUnique({
+    where: { name },
+    select: {
+      id: true,
+      name: true,
+      country: true,
+      RPLbcount: true,
+      FameLBcount: true,
+      PeakRP: true,
+      PeakFame: true,
+      PeakRPRank: true,
+      PeakFameRank: true,
+    },
+  });
+};
